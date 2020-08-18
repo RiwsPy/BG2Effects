@@ -55,7 +55,7 @@ Entrée     Valeur correspondante
 
 'Type' : (seulement si Timing != 1)
  1      permanent
-* Active SplState BERSERK_ALWAYS_ACTIVE (33)
+* Active SplState 33 (BERSERK_ALWAYS_ACTIVE)
 * Affecte 1 à la stat #144 (BERSERKSTAGE2)
 * S'équipe de son arme de mêlée la plus puissante
  Autre  activé seulement en combat
@@ -426,8 +426,8 @@ La seconde valeur de la case 'Méthode/Mode' permet de choisir le mode de soin.
 
 'Mode' :
  0   Soin classique
- 1   Ressuscite la cible dont les points de vie sont inférieurs à 1 (applique l'opcode n°32, mode 0)
- 2   Soigne de tous les effets n'ayant pas le timing 'Permanent after death', retire l'objet dans le slot 'Magical Weapon' (slot n°34)
+ 1   Ressuscite la cible dont les points de vie sont inférieurs à 1 (applique l'opcode n°32 : 'Mode' 0)
+ 2   Soigne de tous les effets n'ayant pas le Timing 'Permanent after death', retire l'objet dans le slot 'Magical Weapon' (slot n°34)
  3   Mode 1 + Mode 2
 
 
@@ -448,7 +448,7 @@ La seconde valeur de la case 'Méthode/Mode' permet de choisir le mode de soin.
  6   Comme 0
  7+ Sans effet
 
-'Special' : (pour les 'timing' 0, 2, 3, 5, 8, 10 et 1000)
+'Special' : (pour les Timing 0, 2, 3, 5, 8, 10 et 1000)
  1   Les points de vie actuels ne sont pas modifiés (pour les types 0, 1, 2 et 6)
  Autre  Aucun changement
 
@@ -492,7 +492,7 @@ La seconde valeur de la case 'Méthode/Mode' permet de choisir le mode de soin.
 
 
 * Aucun avantage offensif face à un non-allié ayant la stat #81 (SEEINVISIBLE) active (opcode n°193)
-* Les créatures deviennent invisibles graphiquement seulement aux yeux des non-alliés
+* Les cibles deviennent invisibles graphiquement seulement aux yeux des non-alliés
 * Est dissipé par l'opcode n°47 (si STATE_NONDETECTION (0x200000) inactif)
 * Est dissipé par l'opcode n°116 (si STATE_NONDETECTION (0x200000) inactif)
 * 'Méthode' 0 est dissipé par l'opcode n°136
@@ -506,7 +506,7 @@ La seconde valeur de la case 'Méthode/Mode' permet de choisir le mode de soin.
 
 
 * 'Valeur' peut être positif ou négatif
-* Aucune modification visuelle en timing 'Permanent'
+* Aucune modification visuelle en Timing 'Permanent'
 * Affecte la stat #25 (LORE)
 * Est borné par [0; 100]"
 22,1,"[22] Modification : Chance","Valeur","Méthode","Modifie la Chance de la cible selon la 'Méthode' souhaitée.
@@ -565,7 +565,6 @@ La seconde valeur de la case 'Méthode/Mode' permet de choisir le mode de soin.
 'Special' :
  Affiche l'icône n°'Special' (n°6 par défaut)
 
-
 * Active STATE_POISONED (0x4000)
 * Est dissipé par l'opcode n°11
 * Si 'Valeur' <= 0 et 'Type' <= 0, seule la StrRef est affichée
@@ -573,7 +572,8 @@ La seconde valeur de la case 'Méthode/Mode' permet de choisir le mode de soin.
 * Si 'Valeur' = 0 et 'Type' == 2, la StrRef est affichée et l'animation est jouée
 * Si 'Valeur' <= 1 et 'Type' == 4, la StrRef est affichée et l'animation est jouée
 * Le flag 'Bypass Mirror Image' est activé
-* La fréquence d'activation varie selon le ratio de mouvement"
+* La fréquence d'activation varie selon le ratio de mouvement
+* 'Paramètre 4' s'il est supérieur à 1, multiplie d'autant la fréquence du poison, ce paramètre peut-être modifié via l'opcode n°329"
 26,1,"[26] Dissipation : Malédiction","N/A","N/A","Déséquipe tous les objets et dissipe tous les effets maudits qui touchent la cible.
 
 * Dissipe l'opcode n°283
@@ -590,7 +590,7 @@ La seconde valeur de la case 'Méthode/Mode' permet de choisir le mode de soin.
 * Sans icône : opcode n°142, icône n°24
 * Au-delà de 100%, les dégâts reçus correspondant à l'élément régénère la cible
 * Est borné par [-128; 127]%
-* Exception : méthode 0, timing 1 : [Overflow(-128); Overflow(127)]%
+* Exception : méthode 0, Timing 1 : [Overflow(-128); Overflow(127)]%
 * Affecte la stat #17 (RESISTACID)"
 28,1,"[28] Modification résistance : Froid","Valeur","Méthode","Modifie la résistance au froid de la cible selon la 'Méthode' souhaitée.
 
@@ -604,7 +604,7 @@ La seconde valeur de la case 'Méthode/Mode' permet de choisir le mode de soin.
 * Sans icône : opcode n°142, icône n°25
 * Au-delà de 100%, les dégâts reçus correspondant à l'élément régénère la cible
 * Est borné par [-128; 127]%
-* Exception : méthode 0, timing 1 : [Overflow(-128); Overflow(127)]%
+* Exception : méthode 0, Timing 1 : [Overflow(-128); Overflow(127)]%
 * Affecte la stat #15 (RESISTCOLD)"
 29,1,"[29] Modification résistance : Électricité","Valeur","Méthode","Modifie la résistance à l'électricité de la cible selon la 'Méthode' souhaitée.
 
@@ -618,7 +618,7 @@ La seconde valeur de la case 'Méthode/Mode' permet de choisir le mode de soin.
 * Sans icône : opcode n°142, icône n°27
 * Au-delà de 100%, les dégâts reçus correspondant à l'élément régénère la cible
 * Est borné par [-128; 127]%
-* Exception : méthode 0, timing 1 : [Overflow(-128); Overflow(127)]%
+* Exception : méthode 0, Timing 1 : [Overflow(-128); Overflow(127)]%
 * Affecte la stat #16 (RESISTELECTRICITY)"
 30,1,"[30] Modification résistance : Feu","Valeur","Méthode","Modifie la résistance au feu de la cible selon la 'Méthode' souhaitée.
 
@@ -632,7 +632,7 @@ La seconde valeur de la case 'Méthode/Mode' permet de choisir le mode de soin.
 * Sans icône : opcode n°142, icône n°16
 * Au-delà de 100%, les dégâts reçus correspondant à l'élément régénère la cible
 * Est borné par [-128; 127]%
-* Exception : méthode 0, timing 1 : [Overflow(-128); Overflow(127)]%
+* Exception : méthode 0, Timing 1 : [Overflow(-128); Overflow(127)]%
 * Affecte la stat #14 (RESISTFIRE)"
 31,1,"[31] Modification résistance : Dégâts magiques","Valeur","Méthode","Modifie la résistance aux dégâts magiques de la cible selon la 'Méthode' souhaitée.
 
@@ -728,12 +728,12 @@ Mode :
 
 'Type' :
  0   Inconscient : Se réveille si elle subit des dégâts (même nuls)
- 1   Assomé : active SplState DOESNT_AWAKEN_ON_DAMAGE (36)
+ 1   Assomé : active SplState 36 (DOESNT_AWAKEN_ON_DAMAGE)
  2+  Comme 0
 
 'Special' :
  0   Affiche l'icône n°14
- 1+  Affiche l'icône n°'Special' et active SplState PRONE (249)
+ 1+  Affiche l'icône n°'Special' et active SplState 249 (PRONE)
 
 
 * Affiche la StrRef n°20438 (Inconscient)
@@ -1001,7 +1001,7 @@ Opcodes similaires :
  8   Align.ids
  9   Kit.ids
 
-* Applique l'opcode n°13, type 4"
+* Applique l'opcode n°13 : 'Type' 4"
 56,1,"[56] Modification : Inversion de l'alignement","N/A","N/A","Inverse l'alignement de la cible.
 
 Exemples :
@@ -1179,7 +1179,7 @@ Le code couleur est à spécifier dans le champ 'Code RGB' (calcul en nuance de ro
 * Exceptés : DEVAGOOD, DEVAEVIL, PLANGOOD et PLANEVIL (limités à 1)
 * Ces restrictions peuvent être modifiées dans le fichier summlimt.2da
 * Ces restrictions ne s'appliquent qu'aux membres du groupe et aux images projetées (générées par simulacre par exemple)
-* Une fois l'effet expiré, applique l'opcode n°68, 'notification' 0
+* Une fois l'effet expiré, applique l'opcode n°68 : 'Notification' 0
 * Une invocation de Type 5 faite par un invocateur NEUTRAL sera d'allégeance NEUTRAL"
 68,1,"[68] Désinvocation de créature","Notification","N/A","Fait disparaître la cible.
 
@@ -1296,7 +1296,7 @@ Le code couleur est à spécifier dans le champ 'Code RGB' (calcul en nuance de ro
  11 Toucher de la goule (une utilisation) (si 'Valeur' > 0)
  12 Toucher de la goule (si 'Valeur' > 0)
  13 Contagion : Type 4 + 5 + 9 + 10
- 14+ Active l'icône et le SplState 250
+ 14+ Active l'icône et le SplState 250 (DISEASED)
 
 'Special' :
  1+   Affiche l'icône n°'Special'
@@ -1325,7 +1325,7 @@ Le code couleur est à spécifier dans le champ 'Code RGB' (calcul en nuance de ro
 80,2,"[80] État : Surdité","N/A","N/A","Applique les effets de la Surdité à la cible. Cet effet est cumulable avec 'Échec de sort'
 
 
-* Active SplState DEAFENED (38)
+* Active SplState 38 (DEAFENED)
 * Augmente la stat #51 (SPELLFAILUREMAGE) de 50
 * Augmente la stat #52 (SPELLFAILUREPRIEST) de 50
 * La cible ne profite plus des effets du chant de son barde
@@ -1336,9 +1336,9 @@ Le code couleur est à spécifier dans le champ 'Code RGB' (calcul en nuance de ro
 
 
 * Dissipe l'opcode n°80
-* Retire le SplState DEAFENED (38)
+* Retire le SplState 38 (DEAFENED)
 * N'annule pas l'icône : opcode n°240, icône n°112"
-82,1,"[82] Modification : Script AI","N/A","Type","Remplace le script spécifié dans le champ 'Ressource' à la place du script 'Type' de la cible.
+82,1,"[82] Modification : Script AI","N/A","Type","Le script 'Type' de la cible est remplacé par 'Ressource'.BCS
 
 'Type' : (cf SCRLEV.IDS)
  0  OVERRIDE
@@ -1416,7 +1416,7 @@ Le code couleur est à spécifier dans le champ 'Code RGB' (calcul en nuance de ro
 * 'Valeur' peut être positif ou négatif
 * Affecte la stat #24 (RESISTMISSILE)
 * Est borné par [-128; 100]%"
-90,1,"[90] Modification : Crochetage","Valeur","Méthode","Modifie le talent de crochetage des serrures de la cible selon la 'Méthode' souhaitée.
+90,1,"[90] Modification : Crochetage","Valeur","Méthode","Modifie la maîtrise du talent 'Crochetage' de la cible selon la 'Méthode' souhaitée.
 
 'Méthode' :
  0   Incrémentation  -> Talent += 'Valeur'
@@ -1427,7 +1427,7 @@ Le code couleur est à spécifier dans le champ 'Code RGB' (calcul en nuance de ro
 * 'Valeur' peut être positif ou négatif
 * Affecte la stat #26 (LOCKPICKING) (sous condition)
 * Est borné par [0; 255]%"
-91,1,"[91] Modification : Détection des pièges","Valeur","Méthode","Modifie le talent de détection des pièges de la cible selon la 'Méthode' souhaitée.
+91,1,"[91] Modification : Détection des pièges","Valeur","Méthode","Modifie la maîtrise du talent 'Détection des pièges' de la cible selon la 'Méthode' souhaitée.
 
 'Méthode' :
  0   Incrémentation  -> Talent += 'Valeur'
@@ -1438,7 +1438,7 @@ Le code couleur est à spécifier dans le champ 'Code RGB' (calcul en nuance de ro
 * 'Valeur' peut être positif ou négatif
 * Affecte la stat #28 (TRAPS)
 * Est borné par [0; 255]%"
-92,1,"[92] Modification : Vol à la tire","Valeur","Méthode","Modifie le talent de Vol à la tire de la cible selon la 'Méthode' souhaitée.
+92,1,"[92] Modification : Vol à la tire","Valeur","Méthode","Modifie la maîtrise du talent 'Vol à la tire' de la cible selon la 'Méthode' souhaitée.
 
 'Méthode' :
  0   Incrémentation  -> Talent += 'Valeur'
@@ -1519,7 +1519,7 @@ Le code couleur est à spécifier dans le champ 'Code RGB' (calcul en nuance de ro
  Affiche l'icône n°'Special' (habituellement 56 ou 87)
 
 
-* Le timing 'While Equiped' n'est compatible qu'avec les 'Méthode' 2 et 3
+* Le Timing 'While Equiped' n'est compatible qu'avec les 'Méthode' 2 et 3
 * La fréquence d'activation varie selon le ratio de mouvement
 * 'Méthode' 2  : 'Valeur' peut être positif ou négatif"
 99,2,"[99] Modification : Durée des sorts","Durée (%)","Type","Modifie la durée des sorts du type spécifié qui touchent la cible.
@@ -1648,11 +1648,11 @@ Si cet opcode est utilisé pendant une durée limitée, le nom de la cible sera ens
 
 * Inefficace si STATE_DEAD (0x800) actif"
 110,2,"[110] Sans effet","N/A","N/A","/"
-111,1,"[111] Objet : S'équiper d'une arme magique","Nombre","N/A","Crée 'Nombre' fois l'objet spécifié dans le champ 'Ressource'.
+111,1,"[111] Objet : S'équiper d'une arme magique","Nombre","N/A","Crée 'Nombre' fois l'objet 'Ressource'.ITM.
 
 * L'objet est inséré dans le slot 'Magical Weapon' (slot n°34)
 * Si un objet est déjà présent dans le slot, celui-ci disparait"
-112,1,"[112] Objet : Retrait","Son","N/A","Retire un exemplaire (ou une pile) de l'inventaire de la cible, l'objet spécifié dans le champ 'Ressource'.
+112,1,"[112] Objet : Retrait","Son","N/A","Retire un exemplaire (ou une pile) de l'inventaire de la cible, l'objet 'Ressource'.ITM.
 Inefficace sur les objets présents dans un sac de contenance.
 Si l'objet est présent en plusieurs exemplaires, sera retiré la première occurence trouvée.
 Fonctionne sur les objets équipés.
@@ -1672,15 +1672,15 @@ Affecte 1 à la stat #61 (IDENTIFYMODE)"
  0   Mauvais 
   Joue le son EFF_M35A.WAV
   Affiche la StrRef n°16505
-  Applique l'opcode n°50 : Fréquence 30, Code RGB(255,0,0)
+  Applique l'opcode n°50 : Code RGB(255, 0, 0), Fréquence 30
  1   Neutre
   Joue le son EFF_M37.WAV
   Affiche la StrRef n°16504
-  Applique l'opcode n°50 : Fréquence 30, Code RGB(0,125,255)
+  Applique l'opcode n°50 : Code RGB(0, 125, 255), Fréquence 30
  2   Bon
   Joue le son ACT_08.WAV
   Affiche la StrRef n°16503
-  Applique l'opcode n°50 : Fréquence 30, Code RGB(0,255,0)
+  Applique l'opcode n°50 : Code RGB(0, 255, 0), Fréquence 30
 
 Active le son associé et la StrRef en fonction de l'alignement de la cible
 "
@@ -1724,7 +1724,7 @@ Utilise l'opcode n°159 pour créer les images
  ...
  9   +9"
 121,2,"[121] Sans effet","N/A","N/A","/"
-122,1,"[122] Objet : Création I","Nombre","N/A","Crée 'Nombre' fois dans l'inventaire de la cible, l'objet spécifié dans le champ 'Ressource'.
+122,1,"[122] Objet : Création I","Nombre","N/A","Crée 'Nombre' fois dans l'inventaire de la cible, l'objet 'Ressource'.ITM.
 L'objet possèdera 'Paramètre 3' charges pour sa première capacité et 'Paramètre 4' pour sa seconde.
 
 'Ressource 2' et 'Ressource 3' : (si 'Ressource' non vide)
@@ -1734,7 +1734,7 @@ L'objet possèdera 'Paramètre 3' charges pour sa première capacité et 'Paramètre 
 
 * Similaire à l'opcode n°255
 * Une fois l'effet expiré, applique l'opcode n°123"
-123,1,"[123] Objet : Retrait","N/A","N/A","Supprime l'objet spécifié dans 'Ressource' de l'inventaire de la cible
+123,1,"[123] Objet : Retrait","N/A","N/A","Retire l'objet 'Ressource'.ITM de l'inventaire de la cible
 
 * L'effet est permanent"
 124,1,"[124] Téléportation","N/A","Mode","Téléporte le lanceur de sort selon le mode défini.
@@ -1801,7 +1801,7 @@ Créature invoquée :
 * Exceptés : DEVAGOOD, DEVAEVIL, PLANGOOD et PLANEVIL (limités à 1)
 * Ces restrictions peuvent être modifiées dans le fichier summlimt.2da
 * Ces restrictions ne s'appliquent qu'aux membres du groupe et aux images projetées (générées par simulacre par exemple)
-* Une fois le timing écoulé, la désinvocation se fait grâce à l'opcode n°68
+* Une fois l'effet expiré, la désinvocation se fait grâce à l'opcode n°68
 * Identique à l'opcode n°331"
 128,1,"[128] État : Confusion","N/A","N/A","Rend la cible confuse.
 
@@ -2217,7 +2217,7 @@ Emplacement 10 : l'arme est automatiquement équipée mais sans changement d'anima
  2   Capacité innée (toutes) | /
  3   Capacité innée (celles ayant le flag 'No failure' inactif) | /
 
-* La StrRef ne s'affiche que si la cible est concernée (rien ne s'affiche pour un Guerrier a qui on enlève ses sorts de mages qu'il n'a pas)
+* La StrRef ne s'affiche que si la cible est concernée (rien ne s'affiche pour le Guerrier pur a qui l'on ôte des sorts de mages)
 * Le Type 2 peut bloquer des compétences comme 'Antichambre'"
 146,1,"[146] Incantation de Sort : Sur une cible","Niveau du sort","Type d'incantation","Lance le sort indiqué dans le champ 'Ressource' au niveau 'Niveau du sort' sur la cible.
 
@@ -2603,7 +2603,7 @@ L'effet est permanent."
 * Sans icône : opcode n°142, icône n°30
 * Est borné par [-128; 100]%
 * Affecte la stat #74 (RESISTPOISON)"
-174,1,"[174] Active un effet sonore","N/A","N/A","Joue le fichier .wav spécifié dans le champ 'Ressource'."
+174,1,"[174] Active un effet sonore","N/A","N/A","Joue le fichier 'Ressource'.WAV."
 175,1,"[175] État : Paralysie II","Entrée IDS n°","Fichier IDS","Paralyse la cible correspondant aux informations indiquées.
 
 'Fichier IDS' :
@@ -2620,7 +2620,7 @@ L'effet est permanent."
 * Affecte 1 à la stat #58 (HELD)
 * Affiche l'icône n°13
 * Affiche la StrRef n°14102
-* Applique l'opcode n°50 (RGB(237,198,93), Fréquence 45)
+* Applique l'opcode n°50 : Code RGB(237, 198, 93), Fréquence 45
 * Est dissipé par l'opcode n°13
 * Est dissipé par l'opcode n°162
 * Inefficace si STATE_DEAD (0x800) actif
@@ -2802,7 +2802,7 @@ Note : les objets équipés mais inactifs comme les munitions activent tout de mêm
 * Affecte 1 à la stat #58 (HELD)
 * Affiche l'icône n°13
 * Affiche la StrRef n°14102
-* Applique l'opcode n°50 (RGB(237,198,93), Fréquence 45)
+* Applique l'opcode n°50 : Code RGB(237, 198, 93), Fréquence 45
 * Est dissipé par l'opcode n°13
 * Inefficace si STATE_DEAD (0x800) actif
 * Similaire aux opcodes n°109 et 175"
@@ -2868,12 +2868,12 @@ Par défaut, les familiers sont : (cf BALDUR.GAM)
 * Le familier est invoqué avec l'animation spanisum.bam
 * Le familier possède l'EA FAMILIAR (3)
 * Seul le protagoniste peut utiliser cet opcode
-* Active l'opcode n°18 sur la cible (paramètre 1 : moitié des points de vie actuels du familier, mode 0, timing 1)
-* Active l'opcode n°195 sur le familier (paramètre 1 = points de vie maximums du familier, paramètre 2 : 400000h (dégâts magiques par cumulation), timing 9)
-* Active l'opcode n°196 sur le familier (timing 9)
-* Active l'opcode n°268 sur le familier (timing 1)"
+* Active l'opcode n°18 sur la cible (paramètre 1 : moitié des points de vie actuels du familier, Méthode 0, Timing 1)
+* Active l'opcode n°195 sur le familier (paramètre 1 = points de vie maximums du familier, paramètre 2 : 400000h (dégâts magiques par cumulation), Timing 9)
+* Active l'opcode n°196 sur le familier (Timing 9)
+* Active l'opcode n°268 sur le familier (Timing 1)"
 193,1,"[193] Détection de l'invisibilité","N/A","Valeur","Active ou désactive la détection de l'invisibilité de la cible.
-La cible peut alors attaquer les créatures invisibles sans malus et jeter des sorts sur les créatures avec une invisibilité majeure
+La cible peut alors attaquer les personnages invisibles sans malus et jeter des sorts sur les personnages avec une invisibilité majeure
 
 'Valeur' :
  0   Désactive
@@ -2889,10 +2889,10 @@ La cible peut alors attaquer les créatures invisibles sans malus et jeter des so
 * Affecte 'Valeur' à la stat #82 (IGNOREDIALOGPAUSE)"
 195,1,"[195] Familier : Mort","Valeur","Mode/Type","Cet opcode gère les effets infligés au Protagoniste à la mort de son familier
 
-Le Protagoniste perd un point de Constitution de façon permanente (opcode 10, timing 9)
+Le Protagoniste perd un point de Constitution de façon permanente (opcode 10, Timing 9)
 Le Protagoniste perd ensuite les points de vie bonus accordés par son familier (opcode 18)
 Puis, des dégâts lui sont infligés dont la paramétrisation est identique à celle de l'opcode n°12 (delayed 1)"
-196,1,"[196] Familier : Désactivation","N/A","N/A","Cet opcode, s'il est activé sur une créature du fichier .Gam, empêche le Protagoniste d'invoquer un familier
+196,1,"[196] Familier : Désactivation","N/A","N/A","Cet opcode, s'il est activé sur une cible présente dans le fichier .Gam, empêche le Protagoniste d'invoquer un familier
 
 * Est utilisé par l'opcode n°192"
 197,1,"[197] Protection : Réflexion de projectiles (.pro)","N/A","Numéro","La cible renvoi les projectiles indiqués dont elle est victime sur leurs sources respectives.
@@ -3004,7 +3004,7 @@ Mettre -1 ou 0 pour ne rien afficher.
 * Est dissipé par l'opcode n°212
 * La cible disparait avec son équipement, quitte le groupe et devient NEUTRAL
 * Considéré comme une mort de type 4 (voir opcode n°13)"
-212,1,"[212] Dissipation : Emprisonnement","N/A","N/A","Libère instantanément les créatures de la zone qui ont été victimes d'un emprisonnement ou d'un labyrinthe.
+212,1,"[212] Dissipation : Emprisonnement","N/A","N/A","Libère instantanément dans la zone toutes les victimes d'un emprisonnement ou d'un labyrinthe.
 
 * Dissipe l'opcode n°211
 * Dissipe l'opcode n°213"
@@ -3158,7 +3158,7 @@ Active le sort 'Ressource'.SPL lorsque 'Niveau cumulé' de sorts ont été contrés.
 * Dissipe l'opcode n°216"
 225,1,"[225] Détection de la magie","N/A","N/A","La cible se met à rougeoyer si elle est affectée par des effets magique qui peuvent être dissipés
 
-* Applique l'opcode n°50 (couleur (255, 0, 0), fréquence 30)
+* Applique l'opcode n°50 : Code RGB(255, 0, 0), Fréquence 30
 * Joue le son EFF_M35A.wav sur la source"
 226,1,"[226] Protection : Sort (sphère) (niveau cumulé)","Niveau cumulé","Sphère","La cible peut contrer 'Niveau cumulé' de sorts de la 'Sphère' indiqué
 Active le sort 'Ressource'.SPL lorsque 'Niveau cumulé' de sorts ont été contrés
@@ -3419,20 +3419,20 @@ L'image est une copie qui possède le même niveau, les mêmes caractéristiques, le
 'Type' :
  0   Peut dialoguer, incontrôlable
  1   Ne peut ni attaquer ni jeter de sort ni utiliser les capacités de son équipement (Double illusoire)
-* Applique l'ocopde n°20 ('Méthode' 0) sur le lanceur de sort
+* Applique l'ocopde n°20 sur le lanceur de sort : 'Méthode' 0
 * Applique le sort 'Mislead.spl' sur l'image
-* Applique l'opcode n°1 ('Méthode' 1, 'Valeur' 0) sur l'image
-* Applique l'opcode n°144 ('Type' 8, 9, 11, 12 et 13) sur l'image
-* Applique l'opcode n°145 ('Type' 0, 1 et 2) sur l'image
-* Applique l'opcode n°237 ('Position' -1, 'Type' 1) sur l'image
+* Applique l'opcode n°1 sur l'image : 'Méthode' 1, 'Valeur' 0
+* Applique l'opcode n°144 sur l'image : 'Type' 8, 9, 11, 12 et 13
+* Applique l'opcode n°145 sur l'image : 'Type' 0, 1 et 2
+* Applique l'opcode n°237 sur l'image : 'Position' -1, 'Type' 1
  2   Ne peut attaquer mais peut jeter des sorts (Image renforcée)
 * Applique le sort 'Projimag.spl' sur l'image
-* Applique l'opcode n°1 ('Méthode' 1, 'Valeur' 0) sur l'image
-* Applique l'opcode n°237 ('Position' -1, 'Type' 2) sur l'image
+* Applique l'opcode n°1 sur l'image : 'Méthode' 1, 'Valeur' 0
+* Applique l'opcode n°237 sur l'image : 'Position' -1, 'Type' 2
  3   Peut attaquer et jeter des sorts (Simulacre)
 * Applique le sort 'Simulacr.spl' sur l'image
-* Applique l'opcode n°216 sur l'image pour réduire son nombre de niveau de 40%
-* Applique l'opcode n°237 ('Position' -1, 'Type' 3) sur l'image
+* Applique l'opcode n°216 sur l'image : 'Valeur' = 40% de son niveau
+* Applique l'opcode n°237 sur l'image : 'Position' -1, 'Type' 3
  4+  Comme 0
 
 * Seules les pièces d'équipement ayant le flag 'Movable' actif sont copiées
@@ -3441,7 +3441,7 @@ L'image est une copie qui possède le même niveau, les mêmes caractéristiques, le
 * Si le lanceur de sort est GOODCUTOFF, l'image sera ALLY
 * Si le lanceur de sort est EVILCUTOFF, l'image sera ENEMY
 * Si le lanceur de sort est NEUTRAL, l'image sera NEUTRAL
-* Une fois le timing expiré, applique l'opcode n°68 ('Notification' 1) sur l'image
+* Une fois l'effet expiré, applique l'opcode n°68 sur l'image : 'Notification' 1
 * Aucun point d'expérience n'est remporté lors de la mort de l'image
 * L'image a le 'Class Flag' Exportable (0x800) inactif
 * Une image peut se copier elle-même (elle sera sans équipement et une image de 'Type' 3 aura un nombre de points de vie erroné)"
@@ -3479,7 +3479,7 @@ L'image possède le même équipement que la cible (exceptés les objets ayant le fl
 
 
 * L'équipement de la cible peut être désintégré avec elle
-* Applique l'opcode n°13 ('Type' 512, 'Notification' 0)"
+* Applique l'opcode n°13 : 'Type' 512, 'Notification' 0"
 239,1,"[239] Compétence : Vision lointaine","N/A","Type","Permet à la cible de voir la zone dans laquelle elle se trouve selon le 'Type' indiqué.
 
 'Type' :
@@ -3756,7 +3756,7 @@ L'effet est permanent."
 245,1,"[245] État : Berserk (préparation)","N/A","Valeur","La cible a 1% de chance de devenir berserk à chaque fois qu'elle réussit une attaque.
 
 * Affecte 'Valeur' à la stat #142 (CHECKFORBERSERK)
-* Dans le cas où la probabilité se réalise, applique l'opcode n°246 ('timing' 1000, 'Valeur' 1) pendant 45 secondes
+* Dans le cas où la probabilité se réalise, applique l'opcode n°246 : Timing 1000, 'Valeur' 1, Duration 45
 * La chance influe sur le résultat du dé : Random(-chance, 100)"
 246,1,"[246] État : Berserk (bonus)","N/A","Valeur","La cible reçoit les bonus de Berserk sans pour autant en avoir le comportement (cf opcode n°247).
 
@@ -3824,18 +3824,18 @@ Il est possible de choisir la couleur du marqueur en renseignant le champ 'Coule
 
 * Dissipe l'opcode n°253
 * Non fonctionnel sur TOB"
-255,1,"[255] Objet : Création II","Charges n°1","N/A","Crée dans l'inventaire de la cible, l'objet spécifié dans le champ 'Ressource'.
+255,1,"[255] Objet : Création II","Charges n°1","N/A","Crée dans l'inventaire de la cible, l'objet 'Ressource'.ITM.
 L'objet possèdera 'Charges n°1' charges pour sa première capacité, 'Paramètre 3' pour sa seconde et 'Paramètre 4' pour sa troisième.
 
 'Ressource 2' et 'Ressource 3' : (si 'Ressource' non vide)
- Si le champ 'Ressource 2' ou/et 'Ressource 3' contient un objet, l'effet choisi aléatoirement un objet entre les différents champs 'Ressource'
- 'Ressource 2' apparait déchargé en 'Paramètre 3' exemplaires
- 'Ressource 3' apparait déchargé en 'Paramètre 4' exemplaires
+ Si le champ 'Ressource 2' ou/et 'Ressource 3' contient un objet, l'effet choisi aléatoirement un objet entre les différents champs 'Ressource'.
+ 'Ressource 2' apparait déchargé en 'Paramètre 3' exemplaires.
+ 'Ressource 3' apparait déchargé en 'Paramètre 4' exemplaires.
 
 * Similaire à l'opcode n°122
 * Utilise l'opcode n°123 pour retirer l'objet si celui-ci est créé pendant une durée limitée"
 256,1,"[256] Contigence : Sauvegarde","N/A","N/A","Stocke les sorts indiqués dans les champs 'Ressource', 'Ressource 2' et 'Ressource 3' dans la contingence.
-Cet opcode ne sert qu'en conjugaison avec l'opcode n°234
+Cet opcode ne sert qu'en conjugaison avec l'opcode n°234 ou n°257.
 
 * Affiche l'icône n°92 (séquenceur de sort)
 * Les contingences ne peuvent se cumuler"
@@ -3854,13 +3854,13 @@ N'est disponible que pour les membres du groupe.
 
 Le nom du sort actuel doit être celui spécifié dans 'Ressource' auquel on rajoute la lettre 'D' (le nom du sort est donc limité à 7 caractères).
 Le sort qui contient l'activation doit être une compétence innée."
-259,1,"[259] Piège à sorts","Valeur","Niveau du sort","La cible peut absorber jusqu'à 'Valeur' niveaux de sorts. Seuls les sorts de 'Niveau du sort' sont absorbés
-Chaque sort absorbé lui permet de se souvenir d'un sort de même niveau précédemment lancé
-Une fois le piège à sorts expiré (ou si 'Valeur' == 0), active sur la cible le sort spécifié dans 'Ressource'
+259,1,"[259] Piège à sorts","Valeur","Niveau du sort","La cible peut absorber jusqu'à 'Valeur' niveaux de sorts. Seuls les sorts de 'Niveau du sort' sont absorbés.
+Chaque sort absorbé lui permet de se souvenir d'un sort de même niveau précédemment lancé.
+Une fois le piège à sorts expiré (ou si 'Valeur' == 0), active sur la cible 'Ressource'.SPL.
 
 * Affiche l'icône n°117 (piège à sorts)
 * Si 'Ressource' est vide, active par défaut 'NomDuSort'+B"
-260,1,"[260] Contingence : Activation (zone)","N/A","N/A","Active un séquenceur de sort à l'endroit choisi à partir du sort indiqué dans 'Ressource'. Le personnage apprend une compétence innée.
+260,1,"[260] Contingence : Activation (zone)","N/A","N/A","Active un séquenceur de sort à l'endroit indiqué à partir du sort indiqué dans 'Ressource'. Le personnage apprend une compétence innée.
 
 Le nom du sort actuel doit être celui spécifié dans 'Ressource' auquel on rajoute la lettre 'P' (le nom du sort est donc limité à 7 caractères).
 Le sort qui contient l'activation doit être une compétence innée."
@@ -3870,7 +3870,7 @@ Si aucun emplacement n'est disponible au niveau indiqué, l'effet tentera de rest
 'Type de sort' :
  0   Sorts profanes
  1   Sorts divins"
-262,1,"[262] Modification : Champ visuel","Valeur","Méthode","Modifie la portée du champ de vision de la créature selon la 'Méthode' souhaitée.
+262,1,"[262] Modification : Champ visuel","Valeur","Méthode","Modifie la portée du champ de vision de la cible selon la 'Méthode' souhaitée.
 Influe notamment sur le trigger See (script) et graphiquement pour les membres du groupe.
 
 'Méthode' :
@@ -3885,9 +3885,9 @@ Influe notamment sur le trigger See (script) et graphiquement pour les membres d
  1   Écrasement  -> Backstab = 'Valeur'
  2   Pourcentage -> Backstab *= 'Valeur' / 100
 
-
-* Affecte la stat #56 (BACKSTABDAMAGEMULTIPLIER)"
-264,1,"[264] Objet : Abandonne au sol","N/A","Type","La cible fait tomber au sol un objet choisi en fonction du 'Type' spécifié.
+* Affecte la stat #56 (BACKSTABDAMAGEMULTIPLIER)
+* Le Timing 1 est automatiquement converti en Timing 9"
+264,1,"[264] Objet : Drop d'objet","N/A","Type","La cible fait tomber au sol un objet choisi en fonction du 'Type' spécifié.
 
 'Type' :
  1   premier objet présent dans les slots d'armes
@@ -3908,35 +3908,36 @@ Sont ignorés :
 
 * 'Méthode' 0 : Similaire à SetGlobal('Ressource', 'GLOBAL', 'Valeur')
 * 'Méthode' 1 : Similaire à IncrementGlobal('Ressource', 'GLOBAL', 'Valeur')
-* 'Ressource' étant limité à 8 caractères, pour les effets externes, il est possible d'utiliser les champs 'Ressource 2' et 'Ressource 3' afin d'augmenter la taille de la variable jusqu'à 24 caractères.
+* Les effets externes peuvent utiliser les champs 'Ressource 2' et 'Ressource 3' pour augmenter la taille de la variable jusqu'à 24 caractères
 * L'effet est permanent
 * Similaire à l'opcode n°309"
-266,1,"[266] Retrait : Protection : Sort (nom)","N/A","N/A","Retire la protection contre le sort indiqué dans le champ 'Ressource'.
+266,1,"[266] Retrait : Protection : Sort (nom)","N/A","N/A","Retire la protection accordée par l'opcode n°206 contre le sort ou l'objet indiqué dans le champ 'Ressource'.
 
 * Dissipe l'opcode n°206"
-267,1,"[267] Protection : Affichage d'une StrRef","StrRef n°","N/A","Empêche l'affichage sur la cible de la StrRef indiquée.
+267,1,"[267] Protection : Affichage d'une StrRef","StrRef n°","N/A","Protège l'affichage par la cible de la StrRef indiquée via l'opcode n°139.
 
 * Contre l'effet de l'opcode n°139"
-268,1,"[268] Compétence : Exploration (oeil du magicien)","N/A","N/A","La créature devient capable d'explorer et de dissiper le brouillard de guerre de la zone dans laquelle il se trouve comme un personnage joueur.
+268,1,"[268] Compétence : Exploration (oeil du magicien)","N/A","N/A","La cible devient capable d'explorer et de dissiper le brouillard de guerre de la zone dans laquelle elle se trouve comme un personnage joueur.
 
-* Affecte 1 à la stat #148 (EXPLORE)"
+* Affecte 1 à la stat #148 (EXPLORE)
+* Un maximum de 8 personnages peuvent posséder cette capacité, la priorité est donnée aux membres du groupe"
 269,1,"[269] Visuel : Tremblement de terre","Intensité","N/A","Fait trembler la fenêtre de jeu selon l'intensité souhaitée."
 270,1,"[270] Dissipation : Immobilisation (visuelle)","N/A","N/A","Ôte l'immobilisation visuelle de la cible.
-
 
 * Dissipe l'opcode n°165
 * Dissipe l'immobilisation de l'opcode n°271
 * Affecte 0 à la stat #70 (CASTERHOLD)"
-271,1,"[271] Désactiver l'animation","N/A","Mode","Ôte l'animation de la cible et l'immobilise (uniquement visuel)
+271,1,"[271] Désactiver l'animation","N/A","Mode","Ôte l'animation de la cible et l'immobilise (uniquement visuel).
 
 'Mode' :
- 0  Sans effet
  1  Affecte 1 à la stat #188 (SUMMON_DISABLE_ACTION)
+ Autre Sans effet
 
 * Immobilise la cible (cf opcode n°165)
+* Retire son cercle de sélection et ses effets d'illusion
 * Affecte 1 à la stat #150 (SUMMONDISABLE)
-* L'immobilisation peut être désactivée grâce à l'opcode n°270"
-272,1,"[272] Active un effet (boucle)","Fréquence","Méthode","Applique l'effet spécifié dans le champ 'Ressource' sur la cible à une fréquence choisie.
+* L'immobilisation est dissipée par l'opcode n°270"
+272,1,"[272] Active un effet (boucle)","Fréquence","Méthode","Applique 'Ressource'.EFF sur la cible à une fréquence choisie.
 
 'Méthode' :
  0  S'active une fois par seconde (si 'Fréquence' != 0)
@@ -3946,45 +3947,43 @@ Sont ignorés :
  4  S'active 'Paramètre 3' fois toutes les 'Fréquence' secondes
  5+ Sans effet
 
-
 * 'Méthode' 3 : l'effet s'active après 'Fréquence' secondes, un effet s'activant toutes les 2 secondes pendant 10 secondes ne s'activera que 4 fois
 * Affiche l'icône n°'Special'
-* La fréquence d'activation varie selon le ratio de mouvement"
-273,1,"[273] Dissipation : Effets de zone (.PRO)","N/A","N/A","Ôte instantanément tous les projectiles listés dans le fichier 2DA indiqué dans 'Ressource'.
+* La fréquence d'activation varie selon le ratio de mouvement
+* La fréquence d'activation est multipliée par 'Paramètre 4' (1 par défaut)"
+273,1,"[273] Dissipation : Effets de zone (.PRO)","N/A","N/A","Ôte instantanément tous les projectiles listés dans 'Ressource'.2DA.
 
 Cf pour l'exemple : 'CLEARAIR.2DA' (Zone d'air pur)"
 274,1,"[274] Téléportation sur cible hostile","N/A","N/A","Téléporte la cible sur un de ses ennemis choisi aléatoirement.
 
-* Inefficace si STATE_DEAD (0x800) actif"
-275,1,"[275] Modification : Se cacher dans l'ombre","Valeur","Méthode","Modifie le total de 'Se cacher dans l'ombre' de la cible selon la 'Méthode' souhaitée.
+* Inefficace si STATE_DEAD (0x800) actif
+* Applique l'opcode n°50 : Code RGB(255, 255, 255), Fréquence 5"
+275,1,"[275] Modification : Se cacher dans l'ombre","Valeur","Méthode","Modifie la maîtrise du talent 'Se cacher dans l'ombre' de la cible selon la 'Méthode' souhaitée.
 
 'Méthode' :
  0   Incrémentation  -> Talent += 'Valeur'
  1   Écrasement  -> Talent = 'Valeur'
  2   Pourcentage -> Talent *= 'Valeur' / 100
-
 
 * 'Valeur' peut être positif ou négatif
 * Affecte la stat #135 (HIDEINSHADOWS)
 * Est borné par [0; 255]"
-276,1,"[276] Modification : Détection des illusions","Valeur","Méthode","Modifie le total de 'Détection des illusions' de la cible selon la 'Méthode' souhaitée.
+276,1,"[276] Modification : Détection des illusions","Valeur","Méthode","Modifie la maîtrise du talent 'Détection des illusions' de la cible selon la 'Méthode' souhaitée.
 
 'Méthode' :
  0   Incrémentation  -> Talent += 'Valeur'
  1   Écrasement  -> Talent = 'Valeur'
  2   Pourcentage -> Talent *= 'Valeur' / 100
-
 
 * 'Valeur' peut être positif ou négatif
 * Affecte la stat #136 (DETECTILLUSIONS)
 * Est borné par [0; 255]"
-277,1,"[277] Modification : Pose de pièges","Valeur","Méthode","Modifie le total de 'Pose de pièges' de la cible selon la 'Méthode' souhaitée.
+277,1,"[277] Modification : Pose de pièges","Valeur","Méthode","Modifie la maîtrise du talent 'Pose de pièges' de la cible selon la 'Méthode' souhaitée.
 
 'Méthode' :
  0   Incrémentation  -> Talent += 'Valeur'
  1   Écrasement  -> Talent = 'Valeur'
  2   Pourcentage -> Talent *= 'Valeur' / 100
-
 
 * 'Valeur' peut être positif ou négatif
 * Affecte la stat #137 (SETTRAPS)
@@ -3996,7 +3995,6 @@ Cf pour l'exemple : 'CLEARAIR.2DA' (Zone d'air pur)"
  1   Écrasement  -> Toucher = 'Valeur'
  2   Pourcentage -> Toucher *= 'Valeur' / 100
 
-
 * 'Valeur' peut être positif ou négatif
 * Affecte la stat #151 (HITBONUS)
 
@@ -4007,7 +4005,7 @@ Opcodes similaires :
 * opcode n°288 (poing)
 * opcode n°306 (main directrice)
 * opcode n°305 (main secondaire)"
-279,1,"[279] Débloquer la compétence active","N/A","Bouton n°","Permet l'utilisation du bouton indiqué dans le champ 'Bouton n°'
+279,1,"[279] Débloquer la compétence active","N/A","Bouton n°","Permet l'utilisation de la compétence active indiquée dans le champ 'Bouton n°'
 
 'Bouton n°' : (cf Button.ids)
  0   Se cacher dans l'ombre
@@ -4032,7 +4030,7 @@ Opcodes similaires :
 280,1,"[280] État : Entropie","N/A","Type","Active ou désactive les effets de la magie entropique sur les prochains sortilèges de la cible selon le 'Type' souhaité.
 
 'Type' :
- 0   Désactive les hiatus entropique
+ 0   Désactive les hiatus entropiques
  1   Affecte le prochain sort
  2+  Affecte tous les sorts pendant la durée de l'effet
 
@@ -4048,7 +4046,7 @@ Opcodes similaires :
 282,1,"[282] Modification : Statistique","Valeur","Statistique n°","Affecte 'Valeur' à la stat #'Statistique n°'+156.
 La liste des statistiques est consultable dans STATS.IDS
 Exemple : si 'Statistique n°' vaut 13, l'opcode affecte la valeur de la stat #169 (DISABLE_CIRCLE) (156+13 = 169)
-
+Attention aux irrégularités, cette règle a ses exceptions :
 la valeur 15 affecte la stat #171
 	#172 et 173 non consultables
 la valeur 19 affecte la stat #174 (au lieu de 18)
@@ -4072,7 +4070,9 @@ la valeur 33 affecte la stat #189
  13 DISABLE_CIRCLE
  14 FIST_THACO_BONUS
  15 FIST_DAMAGE_BONUS
-
+ 16 CLASS_STRING_OVERRIDE_MIXED
+ 17 CLASS_STRING_OVERRIDE_LOWER
+ 18 non affilié, cf 'Special' dans l'opcode n°290
  19 PREVENT_SPELL_PROTECTION_EFFECTS
  20 IMMUNITY_TO_BACKSTAB
  21 WIZARD_PROTECTION_FROM_PETRIFICATION
@@ -4087,7 +4087,6 @@ la valeur 33 affecte la stat #189
  30 ANIMATION_ONLY_HASTE
  31 NO_PERMANENT_DEATH
  32 IMMUNE_TO_TURN_UNDEAD
-
  33 CHAOS_SHIELD
  34 NPC_BUMP
  35 USE_ANY_ITEM
@@ -4101,7 +4100,7 @@ la valeur 33 affecte la stat #189
  43 STONESKINSGOLEM
  44 LEVELDRAIN
 "
-283,1,"[283] Utilisation d'un fichier EFF (maudit)","Entrée IDS n°","Fichier IDS","Applique les effets du fichier EFF spécifié dans le champ 'Ressource' sur la cible correspondant aux indications IDS.
+283,1,"[283] Utilisation d'un fichier EFF (maudit)","Entrée IDS n°","Fichier IDS","Applique les effets du fichier 'Ressource'.EFF sur la cible correspondant aux indications IDS.
 
 'Fichier IDS' :
  2   EA.ids
@@ -4122,7 +4121,6 @@ la valeur 33 affecte la stat #189
  1   Écrasement  -> Tac0 = 'Valeur'
  2   Pourcentage -> Tac0 = 'Valeur' / 100
 
-
 * Les poings sont considérés comme une arme de mêlée
 * 'Valeur' peut être positif ou négatif
 * Affecte la stat #166 (MELEE_THACO_BONUS)
@@ -4141,7 +4139,6 @@ Opcodes similaires :
  1   Écrasement  -> Dégâts = 'Valeur'
  2   Pourcentage -> Dégâts *= 'Valeur' / 100
 
-
 * Les poings sont considérés comme une arme de mêlée
 * 'Valeur' peut être positif ou négatif
 * Affecte la stat #167 (MELEE_DAMAGE_BONUS)
@@ -4157,14 +4154,13 @@ Opcodes similaires :
  1   Écrasement  -> Dégâts = 'Valeur'
  2   Pourcentage -> Dégâts *= 'Valeur' / 100
 
-
 * 'Valeur' peut être positif ou négatif
 * Affecte la stat #168 (MISSILE_DAMAGE_BONUS)
 
 Opcodes similaires :
 * opcode n°285 (mêlée)
 * opcode n°289 (poing)"
-287,1,"[287] Suppression du cercle de sélection","N/A","N/A","Enlève le cercle de sélection de la cible.
+287,1,"[287] Suppression du cercle de sélection","N/A","N/A","Ôte le cercle de sélection de la cible.
 
 * Affecte 1 à la stat #169 (DISABLE_CIRCLE)"
 288,1,"[288] Modification : Tac0 (poing)","Valeur","Méthode","Modifie les jets de toucher au poing de la cible selon la 'Méthode' souhaitée.
@@ -4173,7 +4169,6 @@ Opcodes similaires :
  0   Incrémentation  -> Tac0 += 'Valeur'
  1   Écrasement  -> Tac0 = 'Valeur'
  2   Pourcentage -> Tac0 *= 'Valeur' / 100
-
 
 * 'Valeur' peut être positif ou négatif
 * Affecte la stat #170 (FIST_THACO_BONUS)
@@ -4192,7 +4187,6 @@ Opcodes similaires :
  1   Écrasement  -> Dégâts = 'Valeur'
  2   Pourcentage -> Dégâts = 'Valeur' / 100
 
-
 * 'Valeur' peut être positif ou négatif
 * Affecte la stat #171 (FIST_DAMAGE_BONUS)
 
@@ -4206,7 +4200,8 @@ Opcodes similaires :
  1   Inventaire et archives
 
 * 'Mode' 0 : Affecte 'StrRef n°' à la stat #172 (CLASS_STRING_OVERRIDE_MIXED)
-* 'Mode' 1 : Affecte 'StrRef n°' à la stat #173 (CLASS_STRING_OVERRIDE_LOWER)"
+* 'Mode' 1 : Affecte 'StrRef n°' à la stat #173 (CLASS_STRING_OVERRIDE_LOWER)
+* La classe de la cible est remplacée par la n°'Special' (cf CLASS.IDS)"
 291,1,"[291] Visuel : Bloquer les effets 3D","N/A","Valeur","Désactive ou réactive les effets visuels de nombreux sorts de protection comme Piège à sorts ou Déviation de sorts.
 Certains effets (ceux utilisant des fichiers bam) comme Bouclier de feu ne sont pas altérés.
 
@@ -4219,12 +4214,20 @@ Certains effets (ceux utilisant des fichiers bam) comme Bouclier de feu ne sont 
 
 * Affecte 'Valeur' à la stat #175 (IMMUNITY_TO_BACKSTAB)
 * Active SpellState 40 (SNEAK_ATTACK_IMMUNITY)"
-293,1,"[293] Script AI persistant","N/A","Valeur","Les scripts de la cible persistent à fonctionner même si celle-ci est hors du champ de vision ou hors combat.
+293,1,"[293] Script AI persistant","N/A","Valeur","Active ou désactive la persistance de l'IA de la cible même si celle-ci est hors du champ de vision ou hors combat.
+
+'Valeur' :
+ 0  Désactive
+ 1+ Active
 
 * Affecte 'Valeur' à la stat #183 (PREVENT_AI_SLOWDOWN)"
 294,1,"[294] Modification : Délai entre chaque réplique (existance)","Valeur","N/A","Altère le delai entre chaque réplique de type 'Existance' de la cible (voir Soundset slot n°69 à 74 du fichier .cre correspondant)
-Plus 'Valeur' est faible, plus la fréquence d'apparition augmente.
 Ne fonctionne que pour les personnages non recrutés.
+
+'Valeur':
+ 0  Valeur par défaut
+ 1  Aucune réplique
+ 2+ Fréquence aléatoire inversement proportionnelle à 'Valeur'
 
 * Affecte 'Valeur' à la stat #184 (EXISTANCE_DELAY_OVERRIDE)"
 295,1,"[295] Protection : Mort permanente","N/A","Valeur","Active ou désactive l'immunité de la cible aux morts violentes. Elle pourra toujours être ressuscitée.
@@ -4237,10 +4240,14 @@ Ne fonctionne que pour les personnages non recrutés.
 296,1,"[296] Protection : Effet 3D","N/A","N/A","La cible devient immunisée à l'animation visuelle spécifiée dans le champ 'Ressource'
 
 * Protège de l'opcode n°215"
-297,1,"[297] Protection : Repousser les morts-vivants","N/A","Valeur","La cible devient immunisée contre les effets de la compétence 'Repousser les morts-vivants.
+297,1,"[297] Protection : Repousser les morts-vivants","N/A","Valeur","Active ou désactive l'immunité de la cible contre les effets de la compétence 'Repousser les morts-vivants'.
+
+'Valeur' :
+ 0  Désactive
+ 1+ Active
 
 * Affecte 'Valeur' à la stat #187 (IMMUNE_TO_TURN_UNDEAD)"
-298,1,"[298] Active le script cut250a.bcs","N/A","N/A","Par défaut, ce script téléporte le groupe dans l'Antichambre (AR4500)"
+298,1,"[298] Exécute cut250a.bcs","N/A","N/A","Par défaut, ce script téléporte le groupe dans l'Antichambre (AR4500)"
 299,1,"[299] Modification : Hiatus entropique","Valeur","Icône","Cet opcode modifie le résultat aléatoire de 'Valeur' lors d'un hiatus entropique permettant ainsi de limiter les effets destructeurs.
 
 'Icône' :
@@ -4293,14 +4300,18 @@ Probabilité d'infliger un coup critique : 'Valeur'*5
  31 Carreau
 
 * Affecte 'Valeur' à la stat #146 (CRITICALHITBONUS)"
-302,1,"[302] Compétence : Utilisation de tous les objets","N/A","Valeur","Active ou désactive l'utilisation de tous les objets par la cible quelque soit les restrictions de ceux-ci.
+302,1,"[302] Compétence : Utilisation de tous les objets","N/A","Valeur","Active ou désactive la capacité de la cible à utiliser tous les objets quelque soit les restrictions de ceux-ci.
 
 'Valeur' :
  0  Désactive
  1+ Active
 
-* Affecte 'Valeur' à la stat #191 (USE_ANY_ITEM)
-* Ne concerne pas les objets gérés dans le ficher item_use.2da ou nécessitant des caractéristiques minimales"
+Ne sont pas concernés :
+* Les objets configurés dans item_use.2da
+* Les objets nécessitant des caractéristiques minimales
+* Les sorts d'une école de magie opposée
+
+* Affecte 'Valeur' à la stat #191 (USE_ANY_ITEM)"
 303,1,"[303] Attaque sournoise forcée","N/A","Valeur","Active ou désactive le multiplicateur de dégâts des attaques sournoises à chaque attaque réussie de la cible.
 
 'Valeur' :
@@ -4348,10 +4359,11 @@ Opcodes similaires :
 * opcode n°288 (poing)
 * opcode n°306 (main directrice)
 * opcode n°305 (main secondaire)"
-307,1,"[307] Compétence : Traque","Portée","N/A","Cet opcode permet de simuler l'effet de la compétence de rôdeur traque.
+307,1,"[307] Compétence : Pistage","Portée","N/A","Cet opcode permet de simuler l'effet de la compétence de Rôdeur 'Pistage'.
 
-* Les résultats de la traque pour chaque zone sont détaillés dans le fichier 'tracking.2da'"
-308,1,"[308] Protection : Traque","N/A","Valeur","Active ou désactive la protection de la cible contre la compétence traque
+* Les résultats du pistage pour chaque zone sont détaillés dans le fichier 'tracking.2da'
+* La compétence 'Pistage' possède une portée de 1000, estimé à 50 mètres"
+308,1,"[308] Protection : Pistage","N/A","Valeur","Active ou désactive la protection de la cible contre la compétence de Rôdeur 'Pistage'.
 
 'Valeur' :
  0  Désactive
@@ -4366,14 +4378,14 @@ Opcodes similaires :
 
 * 'Méthode' 0 : Similaire à SetGlobal('Ressource', 'LOCALS', 'Valeur')
 * 'Méthode' 1 : Similaire à IncrementGlobal('Ressource', 'LOCALS', 'Valeur')
-* 'Ressource' étant limité à 8 caractères, pour les effets externes, il est possible d'utiliser les champs 'Ressource 2' et 'Ressource 3' afin d'augmenter la taille de la variable jusqu'à 24 caractères.
+* Les effets externes peuvent utiliser les champs 'Ressource 2' et 'Ressource 3' pour augmenter la taille de la variable jusqu'à 24 caractères
 * Similaire à l'opcode n°265
 * L'effet est permanent"
 310,1,"[310] Protection : Arrêt du temps","N/A","Valeur","Active ou désactive la protection de la cible contre les effets qui arrêtent le temps.
 
 'Valeur' :
- 0  Désactivé
- 1+ Activé
+ 0  Désactive
+ 1+ Active
 
 * Affecte 'Valeur' à la stat #197 (IMMUNE_TO_TIME_STOP)
 * Contre l'effet de l'opcode n°231"
@@ -4406,11 +4418,7 @@ SPWISHxx  Sagesse min  Sagesse max
  24          0            9
  25          0            25
 "
-312,1,"[312] Protection : Emprisonnement","N/A","Valeur","Active ou désactive la protection de la cible contre les effets de Labyrinthe et d'Emprisonnement
-
-'Valeur' :
- 0  Désactive
- 1+ Active
+312,1,"[312] Sans effet","N/A","Valeur","/
 
 * Affecte 'Valeur' à la stat #198 (IMMUNE_TO_SEQUESTER)"
 313,1,"[313] Sans effet","N/A","N/A","/"
@@ -4421,14 +4429,19 @@ Chaque peau permet d'annuler une attaque de dégât de type contondant, tranchant,
 * Affiche l'icône n°80 (peau de pierre)
 * Inefficace si 'Valeur' == 0
 * Inefficace si STATE_DEAD (0x800) actif
+* Joue le son EFF_E02.wav une fois l'effet estompé
 * Similaire à l'opcode n°218"
-315,1,"[315] Visuel : Invisilibilité","N/A","Valeur","L'animation de la cible disparait.
+315,1,"[315] Visuel : Invisilibilité","N/A","Valeur","Active ou désactive l'animation de la cible.
+
+'Valeur' :
+ 0  Désactive
+ 1+ Active
 
 * Affecte 'Valeur' à la stat #201 (DONOTDRAW)"
 316,1,"[316] État : Repos long","N/A","N/A","La cible est totalement reposée.
 
-* Fatigue mise à 0 (cf opcode n°93, méthode 1, valeur 0)
-* Rechargement complet des sorts et des compétences rechargeables de l'équipement
+* Applique l'opcode n°93 : 'Méthode' 1, 'Valeur' 0
+* Rechargement des sorts et des compétences rechargeables de l'équipement
 * Les sorts de soin sont lancés avant le repos
 * Similaire à l'action Rest()"
 317,1,"[317] État : Hâte II","N/A","Type","Applique le 'Type' de Hâte souhaité sur la cible
@@ -4458,7 +4471,7 @@ Si STATE_SLOWED (0x10000) inactif :
 Si STATE_SLOWED (0x10000) actif :
 * Retire STATE_SLOWED (0x10000)
 * Retire l'icône n°41"
-318,1,"[318] Protection sous condition : Sort ou Objet","Valeur","Type","Les cibles de 'Type' deviennent immunisées contre le sort ou l'objet spécifié dans le champ 'Ressource'.
+318,1,"[318] Protection sous condition : Sort ou Objet","Valeur","Type","La cible de 'Type' devient immunisée contre le sort 'Ressource'.SPL et l'objet 'Ressource'.ITM.
 Fonctionnement identique à l'opcode n°324.
 
 'Type' (voir splprot.2da) :
@@ -4648,7 +4661,7 @@ RELATION :
 Habituellement utilisé dans l'onglet 'Equipping Effects' des fichiers .itm
 
 'Power' :
- 0  L'objet ne peut être utilisé par les personnages correspondants aux critères
+ 0  L'objet ne peut pas être utilisé par les personnages correspondants aux critères
  1  L'objet ne peut être utilisé que par les personnages correspondants aux critères
 
 'Fichier IDS' :
@@ -4682,15 +4695,14 @@ Cas particulier :
  1   Effets équipés
  2   Effets limités dans le temps
 
-
 * Peut être utilisé avec une durée de 0 pour simplement ôter de la cible les effets du sort ou de l'objet"
 322,1,"[322] Sans effet","N/A","N/A","/"
-323,1,"[323] Modification : Repousser les morts-vivants","Valeur","Méthode","Permet de modifier le niveau de maîtrise du talent 'Repousser les morts-vivants' de la cible.
+323,1,"[323] Modification : Repousser les morts-vivants","Valeur","Méthode","Modifier la maîtrise du talent 'Repousser les morts-vivants' de la cible selon la 'Méthode' souhaitée.
 
 'Méthode' :
  0   Incrémentation  -> Repoussement += 'Valeur'
  1   Écrasement  -> Repoussement = 'Valeur'"
-324,1,"[324] Protection sous condition : Sort ou Objet + Message","Valeur","Type","Les cibles de 'Type' deviennent immunisées contre le sort ou l'objet spécifié dans le champ 'Ressource'.
+324,1,"[324] Protection sous condition : Sort ou Objet + Message","Valeur","Type","La cible de 'Type' devient immunisée contre le sort 'Ressource'.SPL et l'objet 'Ressource'.ITM.
 En cas de réussite, un message est affiché (StrRef n°99389) (c'est le nom du sort ACTUEL qui est utilisé non celui dans le champ 'Ressource').
 Fonctionnement identique à l'opcode n°318.
 
@@ -4885,7 +4897,6 @@ RELATION :
  2   Pourcentage -> JS *= 'Valeur' / 100
  3   Comme 0 mais effet immédiat (change la base)
 
-
 * 'Valeur' peut être positif ou négatif
 * Affecte la stat #9 (SAVEVSDEATH)
 * Affecte la stat #10 (SAVEVSWANDS)
@@ -4893,7 +4904,7 @@ RELATION :
 * Affecte la stat #12 (SAVEVSBREATH)
 * Affecte la stat #13 (SAVEVSSPELL)
 * Les JS sont bornés par [0; 20]"
-326,1,"[326] Incantation de sort sous condition","Valeur","Type","La cible de 'Type' est affectée par le sort spécifié dans le champ 'Ressource'.
+326,1,"[326] Incantation de sort sous condition","Valeur","Type","La cible de 'Type' est affectée par le sort 'Ressource'.SPL.
 Le sort est lancé de manière instantanée en prenant en compte le niveau du jeteur de sort.
 La durée de l'opcode ne semble pas avoir d'impact sur la durée du sort.
 
@@ -5079,10 +5090,13 @@ RELATION :
  11 : < (binaire)
  Autre : dépend de STAT
 "
-327,1,"[327] Visuel : Effet visuel de sort","Cible","Valeur","Joue l'effet visuel indiqué dans le champ 'Valeur'
-Si la valeur de 'Cible' est différente de 0, l'effet est joué sur la position de la source, au lieu de celle de la cible
+327,1,"[327] Visuel : Effet visuel de sort","Cible","Valeur","Joue l'effet visuel indiqué dans le champ 'Valeur' sur la position de la 'Cible'
 
-Les différentes 'Valeur' peuvent être consultées dans le fichier projectl.ids, à partir de 0x1000"
+'Cible':
+ 0  L'effet est lancé sur la cible
+ 1+ L'effet est lancé sur la source
+
+Valeur' : cf projectl.ids, à partir de 0x1000"
 328,1,"[328] Modification : ExtState ou SplState","N/A","Type","Le state n°'Type' choisi dans le fichier désigné par le champ 'Special' est écrasé par la valeur 1.
 
 'Special' :
@@ -5223,14 +5237,24 @@ Les différentes 'Valeur' peuvent être consultées dans le fichier projectl.ids, à
 253 ACID_LEVEL_2
 254 ACID_LEVEL_3
 255 CYNICISM_EQUIPPED"
-329,1,"[329] Ralentissement du poison","Facteur","N/A","Ralenti les effets du poison sur la cible. La fréquence est alors divisée par 'Facteur'"
-330,1,"[330] Visuel : Affiche la StrRef (flottant)","StrRef n°","Type","Affiche le texte correspondant à la 'StrRef n°' selon le 'Type' indiqué.
-Le texte apparait au-dessus de la cible (pendant 1 seconde environ) et dans la console.
+329,1,"[329] Ralentissement du poison","Facteur","N/A","Ralenti les effets du poison sur la cible.
+La fréquence est alors multipliée par 'Facteur' (cf opcode n°25)."
+330,1,"[330] Visuel : Joue une réplique (flottant)","StrRef n°","Type","Affiche la réplique correspondant à la 'StrRef n°' selon le 'Type' indiqué.
+Le texte apparait au-dessus de la cible (pendant 1 seconde environ) et dans la console. Le son est joué.
 
 'Type' :
- 0   Défaut (affiche la StrRef)
- 1   Cynicism (affiche Cynicism strRef)
+ 0   Affiche la réplique une fois
+ 1   Activation du Cynicism
+	 paramètre par défaut : 'StrRef n°' = 24916, 'Special' = 12
+	 active SplState 255 (CYNICISM_EQUIPPED)
+	 réactive l'opcode en type 2
+ 2   Cynicism
+     inefficace si SplState 255 inactif
+	 affiche une réplique à intervalle aléatoire
+ 3+ Comme 0
 
+'Special' :
+ La réplique est choisie aléatoirement entre 'StrRef n°' et 'StrRef n°' + 'Special' - 1
 
 * 'Paramètre 3' est prioritaire sur 'StrRef n°' et possède la même fonction"
 331,1,"[331] Invocation de créature III (2da)","Niveau cumulé","Type","Invoque un nombre de monstre égal à 'Niveau cumulé'/Niveau_monstre_invoqué
@@ -5260,7 +5284,7 @@ Si 'Special' = 0 :
  applique le fichier vvc indiqué lors de l'invocation
 
 
-* Le nombre de créatures invoqué est restreint à 4
+* Le nombre de créatures invoquées est restreint à 4
 * Exceptés : DEVAGOOD, DEVAEVIL, PLANGOOD et PLANEVIL (limités à 1)
 * Ces restrictions peuvent être modifiées dans le fichier summlimt.2da
 * Ces restrictions ne s'appliquent qu'aux membres du groupe et à leurs images projetées (générées par simulacre par exemple)
@@ -5294,23 +5318,23 @@ Si 'Special' = 0 :
 
 * 'Nombre' doit être supérieur à 0
 * Les jets de sauvegarde sont relancés à chaque nouveau sort"
-334,1,"[334] Compétence : Repousser la créature","N/A","N/A","La cible est repousée comme si un prêtre était à proximité
+334,1,"[334] Compétence : Repousser la cible","N/A","N/A","La cible est repousée comme si un prêtre était à proximité
 L'efficacité de l'effet dépend du niveau dans la compétence de même nom du lanceur de sort
 
 * Joue ACT_06.wav
 * Le niveau de repoussement peut être modifié via l'opcode n°323
 * Notez que la cible n'a pas la nécessité d'être un mort-vivant pour être repoussée
 * En revanche pour les lanceurs de sorts d'alignement mauvais, le charme se limite aux morts-vivants
-* En cas de destruction, l'opcode n°13 est utilisé (mort 8 avec notification)
-* En cas de charme, l'opcode n°241 est utilisé (type 0, durée 60 secondes, uniquement les morts-vivants)
-* En cas d'échec du repoussement (niveau insuffisant), l'opcode n°141 (type 0) est utilisé"
+* En cas de destruction, applique l'opcode n°13 : 'Type de Mort' 8, 'Notification' 0
+* En cas de charme, applique l'opcode n°241 : 'Type de charme' 0, 'Type de la cible' 4, Duration 60
+* En cas d'échec du repoussement (niveau insuffisant), applique l'opcode n°141 : 'Type' 0"
 335,1,"[335] Modification : SpellState (7eyes)","SplState n°","Type","
 'Type' selects the blocked spell or effect, the blocking criteria are listed in 7eyes.2da thus works like a very selective spell trap.
 The special field may be used to define separate eye groups (it will remove 336 opcodes of the same type).
 
 Si le SplState n°'Valeur' est inactif :
  Active SplState n°'Valeur'
- La cible apprend la compétence spécifiée dans le champ 'Ressource', elle sera oubliée une fois l'effet terminé"
+ La cible apprend la compétence 'Ressource'.SPL, elle sera oubliée une fois l'effet terminé"
 336,1,"Graphics: Display Eyes Overlay [336]","Sequence","Type","Displays a twin VVC linked to the target. The last letter of the VVC is stored in 'Sequence'
 
 * Inefficace si STATE_DEAD (0x800) actif
@@ -5340,8 +5364,11 @@ indexed by 'Projectile Type'.
  4  AND
 
 'Special' : Portée"
-340,1,"[340] Sort : Suite à une attaque sournoise","N/A","N/A","Lance le sort spécifié dans le champ 'Ressource' sur la cible lorsque celle-ci porte une attaque sournoise."
-341,1,"[341] Sort : Suite à un coup critique","N/A","Utilisation","Lance le sort spécifié dans le champ 'Ressource' sur la cible lorsque l'attaquant lui porte un coup critique.
+340,1,"[340] Sort : Suite à une attaque sournoise","N/A","N/A","Lance le sort 'Ressource'.SPL sur la cible lorsque celle-ci porte une attaque sournoise.
+
+* Si l'option '3E Sneak Attacks' est désactivée, le niveau du sort est égal au niveau du personnage
+* Si l'option '3E Sneak Attacks' est activée, le niveau du sort est défini dans CRIPPSTR.2DA + 1"
+341,1,"[341] Sort : Suite à un coup critique","N/A","Utilisation","Lance le sort 'Ressource'.SPL sur la cible lorsque l'attaquant lui porte un coup critique.
 
 'Utilisation' :
  0  S'active lorsque l'attaquant porte un coup critique
@@ -5470,7 +5497,7 @@ Armes concernées :
 358,1,"[358] Inconnu","Inconnu","Inconnu","Inconnu"
 359,1,"[359] Inconnu","Inconnu","Inconnu","Inconnu"
 360,1,"[360] Fidèle au protagoniste","N/A","N/A","La cible reste dans le groupe du protagoniste peu importe la réputation de celui-ci."
-361,1,"[361] Sort : Suite à un échec critique","N/A","Utilisation","Lance le sort spécifié dans le champ 'Ressource' sur l'attaquant de la cible lorsque celui-ci porte un échec critique.
+361,1,"[361] Sort : Suite à un échec critique","N/A","Utilisation","Lance le sort 'Ressource'.SPL sur l'attaquant de la cible lorsque celui-ci porte un échec critique.
 
 'Utilisation' :
  0  S'active lorsque l'attaquant porte un échec critique
@@ -5555,7 +5582,7 @@ Mettez une valeur différente de 0 dans les champs suivants pour activer l'effet 
 'Special' : la couleur du cercle de sélection reste inchangée
 
 * La durée de l'effet est environ 10 fois plus courte que celle indiquée dans le champ 'Duration'"
-366,1,"[366] Sort : En mouvement","N/A","N/A","Lance le sort spécifié dans le champ 'Ressource' si la cible est en mouvement.
+366,1,"[366] Sort : En mouvement","N/A","N/A","Lance le sort 'Ressource'.SPL si la cible est en mouvement.
 
 * Le sort est lancé instantanément"
 367,1,"[367] Caractéristique : Valeur minimale", "N/A", "Valeur", "Active ou désactive la mort par absorption de caractéristique.
