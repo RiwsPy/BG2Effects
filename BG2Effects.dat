@@ -1008,25 +1008,31 @@ Exemples :
  49   Chaotique Bon
  50   Chaotique Neutre
  51   Chaotique Mauvais"
-58,1,"[58] Dissipation de la magie","Niveau","Méthode/Mode","Dissipe les effets magiques présents sur la cible.
+58,1,"[58] Dissipation : Magie","Niveau","Méthode/Mode","Tente de dissiper les effets dissipables présents sur la cible.
 
 'Méthode' :
- 0   Dissipation sans restriction
- 1   Dissipation selon le niveau du lanceur de sort
- 2   Dissipation selon 'Niveau' spécifié
+ 0   Dissipation forcée de tous les effets non équipés
+ 1+ Dissipation aléatoire des effets non équipés : prise en compte du niveau de dissipation (cf 'Mode')
 
 'Mode' :
- 0   Always dispel
- 1   Do not dispel
- 2   Chance of dispel
+ 0  
+    Niveau de dissipation = niveau du lanceur de sort
+    Dissipe les effets équipés, quelque soit la 'Méthode' choisie
+ 2 
+   Niveau de dissipation = 'Niveau'
+   'Méthode' 0 : force la dissipation des effets équipés
+   'Méthode' 1+ : dissipe les effets équipés selon la probabilité de réussite
+ Autre  
+    Niveau de dissipation = 'Niveau'
+    Aucun effet sur les effets équipés
 
-* Dissipe également les objets dans le slot n°34 (Magical weapon)
-* Inefficace sur les objets ayant le flag 'Content has weigh' actif
-* Par défaut, le niveau du lanceur de sort est 10
-* Pour les 'Méthode' 1 et 2, la probabilité de réussite par défaut est de 50%
-* Si le niveau du lanceur de sort est supérieur à celui de l'effet, la probabilité de succès augmente de 5% par niveau
-* Si le niveau du lanceur de sort est inférieur à celui de l'effet, la probabilité de succès diminue de 10% par niveau
-* La probabilité de réussite est bornée par [1; 99]%"
+* Si le niveau de l'effet est supérieur au niveau de dissipation :
+  Probabilité de réussite = 100 - (niveau_effet - niveau_dissipation + 5) * 10
+* Sinon :
+  Probabilité de réussite = 100 - (niveau_effet - niveau_dissipation + 10) * 5
+
+* Sont dissipables les effets ayant le bit 1 'Resist' actif
+* Inefficace sur les objets ayant le flag 'Content has weigh' actif"
 59,1,"[59] Modification : Déplacement silencieux","Valeur","Méthode","Modifie la maîtrise du talent 'Déplacement silencieux' de la cible selon les champs renseignés.
 
 'Méthode' :
@@ -1299,6 +1305,7 @@ Le code couleur est à spécifier dans le champ 'Code RGB' (calcul en nuance de ro
 * 'Type' 2 et 3 : la fréquence est multipliée par 'Paramètre 4' (si > 1)
 * 'Type' 10 : active STATE_SLOWED (0x10000), sans icône
 * 'Type' 11 et 12 : active SplState 46 (MOLD_TOUCH)
+* 'Type' 12, x = Duration/6, inflige x dégâts / round (si 'Paramètre' 4 == 0), utilisable x fois
 * Dice est inutilisable pour infliger des dégâts variables
 * La fréquence d'activation varie selon le ratio de mouvement
 * Est dissipé par l'opcode 79
@@ -2235,6 +2242,7 @@ L'icône n°79 (emprisonnement) ne peut être affiché par cet opcode.
 * L'onglet 'Casting Features' du sort n'est pris en compte que pour les sorts incantés
 * Aucun effet incantatoire pour les Type 1 et 2
 * Les sorts de 'Type' 0 sont sensibles aux hiatus entropiques
+* Applique l'action ForceSpell() pour lancer le sort
 
 * Crash possible si couplé avec le Timing 'While Equiped'"
 147,1,"[147] Modification : Retranscription d'un sort","N/A","N/A","La cible tente de retranscrire le sort 'Ressource'.SPL
@@ -2610,7 +2618,7 @@ Contrairement à l'opcode n°147, la probabilité d'apprentissage est de 100% et la
 Cela concerne aussi bien les sorts profanes, les sorts divins que les compétences innées.
 
 * L'effet est permanent"
-173,1,"[173] Modification résistance : Poison","Valeur","N/A","Altère la résistance au poison de la cible de 'Valeur'
+173,1,"[173] Modification résistance : Poison","Valeur","N/A","Incrémente la résistance au poison de la cible de 'Valeur'.
 
 Résistance += 'Valeur'
 
@@ -3929,7 +3937,7 @@ Influe notamment sur le trigger See (script) et graphiquement pour les membres d
 
 * Affecte la stat #56 (BACKSTABDAMAGEMULTIPLIER)
 * Le Timing 1 est automatiquement converti en Timing 9"
-264,1,"[264] Objet : Drop d'objet","N/A","Type","La cible fait tomber au sol un objet choisi en fonction du 'Type' spécifié.
+264,1,"[264] Objet : Drop d'objet","N/A","Type","La cible fait tomber au sol, sur sa position, un objet choisi en fonction du 'Type' spécifié.
 
 'Type' :
  1   premier objet présent dans les slots d'armes
@@ -5397,8 +5405,8 @@ Le lanceur de sort est considéré de niveau MIN(1, 'Niveau').
 
 * 'Nombre' doit être supérieur à 0
 * Les jets de sauvegarde sont relancés à chaque nouveau sort"
-334,1,"[334] État : Repousser la cible","N/A","N/A","La cible est repoussée comme si un prêtre était à proximité
-L'efficacité de l'effet dépend du niveau dans le talent de même nom du lanceur de sort
+334,1,"[334] État : Repousser la cible","N/A","N/A","La cible est repoussée comme si un prêtre était à proximité.
+L'efficacité de l'effet dépend du niveau de talent 'Repousser les morts-vivants' de la source.
 
 En cas de réussite (niveau_de_repoussement >= niveau_du_mort_vivant) :
 * Applique l'opcode n°141 : 'Type' 0
