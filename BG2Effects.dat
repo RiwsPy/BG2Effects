@@ -116,9 +116,9 @@ Entrée     Valeur correspondante
 
  1000  Comme 0, sans StrRef
  1001  Comme 1, sans StrRef
- 1002  Comme 2, sans StrRef
+ 1002  Comme 2, sans StrRef, affiche l'icône 43
  1003  Comme 3, sans StrRef, affiche l'icône 43
- 1004  Comme 4, sans StrRef, affiche l'icône 43
+ 1004  Comme 4, sans StrRef
  1005  Comme 5, sans StrRef
 
 
@@ -3771,9 +3771,9 @@ Est utilisé notamment par la capacité de repoussement des morts-vivants des cler
 
  1000  Comme 0, sans StrRef
  1001  Comme 1, sans StrRef
- 1002  Comme 2, sans StrRef
+ 1002  Comme 2, sans StrRef, affiche l'icône 43
  1003  Comme 3, sans StrRef, affiche l'icône 43
- 1004  Comme 4, sans StrRef, affiche l'icône 43
+ 1004  Comme 4, sans StrRef
  1005  Comme 5, sans StrRef
 
 Pour tous les 'Type de charme' :
