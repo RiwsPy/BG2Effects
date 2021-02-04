@@ -27,7 +27,7 @@ Entrée     Valeur correspondante
  5              5
  6              0.5
  7              1.5
- 8              2.5
+ 8              2.5                                                                                                                                                                                             
  9              3.5
  10+          4.5
 
@@ -258,7 +258,7 @@ L'intervalle entre chaque rayonnement est à définir dans le champ 'Fréquence'
  3  Accumulation % -> Dégâts subit = PV - (PV * 'Valeur')/100
  4+ Sans effet
 
-'Type de dégât' :
+'Type de dégât' : (cf DMGTYPE.IDS)
  0 0     Contondant
  1 0     Acide
  2 0     Froid
@@ -271,13 +271,13 @@ L'intervalle entre chaque rayonnement est à définir dans le champ 'Fréquence'
  0 1     Tranchant
  0 2     Feu magique
  0 4     Froid magique
- 0 8     Poing
+ 0 8     Non-létal
 
 'Special' :
  0    Jet de Sauvegarde pour annuler (esquive totale)
- 1    Drain de vie : Cible > Jeteur de sort
- 2    Drain de vie : Jeteur de sort > Cible : bug
- 4    Efficace si le jeteur de sort est équipé de son poing dans sa main directrice
+ 1    Drain de vie : Cible > Source
+ 2    Drain de vie : Source > Cible : bug
+ 4    Efficace si la source est équipé de son poing dans sa main directrice
  8    Comme 1, non cumulable
  16   Comme 8
  32   Aucune notification de dégâts
@@ -375,8 +375,7 @@ Les champs 'Dice' peuvent être renseignés pour infliger des dégâts (Valeur = X d
 
 * Retire STATE_FROZEN_DEATH (0x64)
 * Met la cible à 1 point de vie
-* Inefficace si STATE_FROZEN_DEATH (0x64) inactif
-* L'effet est permanent"
+* Inefficace si STATE_FROZEN_DEATH (0x64) inactif"
 15,1,"[15] Modification : Dextérité","Valeur","Méthode","Modifie la Dextérité de la cible selon la 'Méthode' souhaitée.
 
 'Méthode' :
@@ -1016,7 +1015,7 @@ Exemples :
 
 'Mode' :
  0  
-    Niveau de dissipation = niveau du lanceur de sort
+    Niveau de dissipation = niveau de l'incantateur
     Dissipe les effets équipés, quelque soit la 'Méthode' choisie
  2 
    Niveau de dissipation = 'Niveau'
@@ -1701,7 +1700,7 @@ Active le son associé et la StrRef en fonction de l'alignement de la cible
 * Similaire à l'opcode n°136"
 117,1,"[117] État : Clairvoyance","N/A","N/A","Révèle toute la zone actuelle sans limitation de portée."
 118,2,"[118] Sans effet","N/A","N/A","/"
-119,1,"[119] État : Image-miroir","N/A","N/A","La cible s'entoure d'un nombre d'images miroirs selon son niveau de lanceur de sort profane.
+119,1,"[119] État : Image miroir","N/A","N/A","La cible s'entoure d'un nombre d'images miroirs selon son niveau de lanceur de sort profane.
 Nombre d'image créées = min(8, (4 + niveau))
 Utilise l'opcode n°159 pour créer les images
 
@@ -1743,7 +1742,7 @@ L'objet possèdera 'Paramètre 3' charges pour sa première capacité et 'Paramètre 
 Ne retire que la première occurence de l'objet trouvé.
 
 * L'effet est permanent"
-124,1,"[124] Modification : Téléportation","N/A","Mode","Téléporte le lanceur de sort selon le mode défini.
+124,1,"[124] Modification : Téléportation","N/A","Mode","Téléporte l'incantateur selon le mode défini.
 
 'Mode' :
  0   La source se téléporte sur la cible
@@ -1777,7 +1776,7 @@ L'allégeance de la créature est indiquée entre parenthèse et est fonction de l'a
  1  si 'DiceCount' == 0 : comme 0 (fichier .eff)
  1  Comme 0 (fichier .spl ou .itm)
  2  'Niveau cumulé' = 'Level' (fichier .eff)
- 2  'Niveau cumulé' = niveau du lanceur de sort (fichier .spl ou .itm)
+ 2  'Niveau cumulé' = niveau de l'incantateur (fichier .spl ou .itm)
  3+ Comme 1
 
 Créature invoquée :
@@ -2234,8 +2233,8 @@ L'icône n°79 (emprisonnement) ne peut être affiché par cet opcode.
 
 'Type d'incantation' :
  0  Classique (si 'Niveau du sort' > 0 : lance le sort au niveau 'Niveau du sort')
- 0  Classique (si 'Niveau du sort' == 0 : lance le sort au niveau du jeteur de sort)
- 1  Instantané (lance le sort au niveau du jeteur de sort)
+ 0  Classique (si 'Niveau du sort' == 0 : lance le sort au niveau de l'incantateur)
+ 1  Instantané (lance le sort au niveau de l'incantateur)
  2  Instantané (lance le sort au niveau 'Niveau du sort')
  3+ Comme 1
  
@@ -2249,7 +2248,7 @@ L'icône n°79 (emprisonnement) ne peut être affiché par cet opcode.
 
 * La probabilité de réussite dépend de l'Intelligence de la cible (cf Intmod.2DA (colonne 1))
 * Pour les mages spécialistes : +15% de réussite pour les sorts de leur école, -15% sinon
-* En cas de réussite, une cible GOODCUTOFF et son groupe gagnent l'expérience correspondant au niveau du sort (cf Xpbonus.2DA)
+* En cas de réussite, une cible GOODCUTOFF et son groupe gagnent l'expérience correspondant au niveau du sort (cf Xpbonus.2DA), grâce à l'action AddexperienceParty
 * Similaire à l'opcode n°171"
 148,1,"[148] Incantation de Sort : Sur une zone","Niveau du sort","Type d'incantation","Lance le sort 'Ressource'.SPL au niveau 'Niveau du sort' à l'endroit souhaité.
 
@@ -2258,7 +2257,7 @@ L'icône n°79 (emprisonnement) ne peut être affiché par cet opcode.
  1+ Instantané
 
 * L'onglet 'Casting Features' du sort n'est pris en compte que pour les sorts de Type 0
-* Si 'Niveau du sort' == 0, lance au niveau du lanceur de sort.
+* Si 'Niveau du sort' == 0, lance au niveau de l'incantateur.
 * Aucun effet incantatoire pour le Type 1
 * Les sorts de 'Type' 0 sont sensibles aux hiatus entropiques"
 149,1,"[149] Inconnu","N/A","N/A","Identique à l'opcode n°125."
@@ -2293,8 +2292,10 @@ https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op152"
  1+ Utilise 'Ressource'.BAM ou .VCC
 
 * Affecte 1 à la stat #62 (ENTANGLE)
-* Affecte 0 à la stat #66 (GREASE)
-* Sans icône : opcode n°142, icône n°144"
+* Affecte 0 à la stat #66 (GREASE)**
+* Sans icône : opcode n°142, icône n°144
+
+** Uniquement pour les versions 2.5-"
 155,1,"[155] État : Globe mineur","N/A","Mode","Applique les effets de Globe mineur sur la cible.
 
 'Mode' :
@@ -2334,16 +2335,18 @@ Effets :
  1+ Utilise 'Ressource'.BAM ou .VCC
 
 * Affecte 1 à la stat #66 (GREASE)
-* Affecte 0 à la stat #62 (ENTANGLE)
-* Sans icône : opcode n°142, icône n°145"
-159,1,"[159] État : Image-Miroir (Nombre exact)","Nombre","N/A","Fait précisement apparaître 'Nombre' images miroir de la cible
+* Affecte 0 à la stat #62 (ENTANGLE)**
+* Sans icône : opcode n°142, icône n°145
+
+** Uniquement pour les versions 2.5-"
+159,1,"[159] État : Image miroir (Nombre exact)","Nombre","N/A","Fait précisement apparaître 'Nombre' images miroir de la cible
 Chaque image peut protéger contre une attaque physique (random(1, 1+nombre_image+chance))
 'Nombre' est borné par [0; 8]
 
 * Inefficace sur les attaques de type poison
 * Inefficace sur les attaques ayant le flag 'bypass image miror' actif
-* Image-miroir est prioritaire sur Peau de pierre
-* La chance influe sur la probabilité qu'Image-miroir pare une attaque
+* Image miroir est prioritaire sur Peau de pierre
+* La chance influe sur la probabilité qu'Image miroir pare une attaque
 * Active STATE_MIRRORIMAGE (0x40000000)
 * Inefficace si STATE_DEAD (0x800) actif"
 160,1,"[160] Dissipation : Sanctuaire","N/A","N/A","Dissipe instantanément de la cible les effets de Sanctuaire.
@@ -3297,19 +3300,19 @@ Active le sort 'Ressource'.SPL lorsque 'Niveau cumulé' de sorts ont été contrés
 232,1,"[232] Incantation de sort sous condition (boucle)","Cible","Condition","Sauvegarde jusqu'à 3 sorts spécifiés dans les champs 'Ressource', 'Ressource 2' et 'Ressource 3' et les activent sur la 'Cible' si la 'Condition' est respectée.
 
 'Cible' : (cf Object.IDS)
- 0   Jeteur de sort (Myself)
+ 0   Source (Myself)
  1   Dernier attaquant (LastHitter)
  2   Ennemi le plus proche (NearestEnemyOf)
  3   Aucune (Nothing)
 
 'Condition' : (cf Trigger.IDS)
  0   La cible réussi son jet de toucher (HitBy)
- 1   La cible perçoit des ennemis (See)
- 2   Le lanceur de sort a moins de 50% de santé (HPPercentLT)
- 3   Le lanceur de sort a moins de 25% de santé (HPPercentLT)
- 4   Le lanceur de sort a moins de 10% de santé (HPPercentLT)
- 5   STATE_HELPLESS du lanceur de sort actif (StateCheck)
- 6   STATE_POISONED du lanceur de sort actif (StateCheck)
+ 1   La source perçoit des ennemis (See)
+ 2   Santé de la source < 50% (HPPercentLT)
+ 3   Santé de la source < 25% (HPPercentLT)
+ 4   Santé de la source < 10% (HPPercentLT)
+ 5   STATE_HELPLESS de la source actif (StateCheck)
+ 6   STATE_POISONED de la source actif (StateCheck)
  7   Est attaqué par la cible (AttackedBy)
  8   La cible est à moins de 4 pieds (PersonalSpaceDistance)
  9   La cible est à moins de 10 pieds (PersonalSpaceDistance)
@@ -3318,13 +3321,13 @@ Active le sort 'Ressource'.SPL lorsque 'Niveau cumulé' de sorts ont été contrés
  12  Cible est tuée (Killed)
  13  Moment de la journée == 'Special' (TimeOfDay) (Timeoday.IDS)
  14  La cible est à moins de 'Special' pieds (PersonalSpaceDistance)
- 15  State du lanceur de sort 'Special' actif (StateCheck) (State.IDS)
- 16  La cible vient de mourir (Die)
- 17  La cible vient de mourir (Died)
+ 15  State de la source 'Special' actif (StateCheck) (State.IDS)
+ 16  La source vient de mourir (Die)
+ 17  La source vient de mourir (Died)
  18  Renvoyé par (TurnedBy)
- 19  Le lanceur de sort a moins de 'Special' points de vie (HPLT)
- 20  Le lanceur de sort a moins de 'Special'% de santé (HPPercentLT)
- 21  SplState n°'Special' du lanceur de sort actif (CheckSpellState) (Splstate.IDS)
+ 19  Santé de la source < 'Special' (HPLT)
+ 20  Santé de la source < 'Special'% (HPPercentLT)
+ 21  SplState n°'Special' de la source actif (CheckSpellState) (Splstate.IDS)
 
 Les sorts sont lancés instantanément
 
@@ -4003,8 +4006,7 @@ Sont ignorés :
 * La fréquence d'activation varie selon le ratio de mouvement
 * La fréquence d'activation est multipliée par 'Paramètre 4' (1 par défaut)"
 273,1,"[273] Dissipation : Effets de zone (.PRO)","N/A","N/A","Ôte instantanément tous les projectiles listés dans 'Ressource'.2DA.
-
-Cf pour l'exemple : 'Clearair.2DA' (Zone d'air pur)"
+Si 'Ressource' est vide, fait la même chose mais depuis le fichier 'CLEARAIR.2DA' (Zone d'air pur)."
 274,1,"[274] Modification : Téléportation sur cible hostile","N/A","N/A","Téléporte la cible sur un de ses ennemis choisi aléatoirement.
 
 * Inefficace si STATE_DEAD (0x800) actif
@@ -4593,18 +4595,18 @@ La cible est immunisée contre le sort si elle répond au critère indiqué :
  38  Alignement < 3 (non-X_Mauvais)
  39  Classe == 6 (Paladin)
  40  Classe != 6 (non-Paladin)
- 41  0x105 == 217 : le jeteur de sort et la cible ont le même alignement moral
- 42  0x105 != 217 ; le jeteur de sort et la cible n'ont pas le même alignement moral
- 43  Le jeteur de sort est également la cible
- 44  Le jeteur de sort n'est pas la cible
+ 41  0x105 == 217 : la source et la cible ont le même alignement moral
+ 42  0x105 != 217 : la source et la cible n'ont pas le même alignement moral
+ 43  La source est également la cible
+ 44  La source n'est pas la cible
  45  Specific == 150
  46  Specific != 150
  47  Race != Breathing
  48  Race == Breathing
- 49  Le jeteur de sort et la cible sont alliés
- 50  Le jeteur de sort et la cible ne sont pas alliés
- 51  Le jeteur de sort et la cible sont ennemis
- 52  Le jeteur de sort et la cible ne sont pas ennemis
+ 49  La source et la cible sont alliées
+ 50  La source et la cible ne sont pas alliées
+ 51  La source et la cible sont ennemies
+ 52  La source et la cible ne sont pas ennemies
  53  Race != Fire or Cold Using/Dwelling
  54  Race == Fire or Cold Using/Dwelling
  55  Mort-vivant ou golem
@@ -4692,12 +4694,12 @@ La table Splprot.2da indique 3 informations pour chaque 'Type' :
 STAT
  * Un entier décimal : Correspond à la stat # indiquée (cf Stats.IDS)
  * Un entier hexadécimal : Correspond à :
- 0x100 : le jeteur de sort est la cible du sort (N/A N/A)
- 0x101 : le jeteur de sort n'est pas la cible du sort (N/A N/A)
+ 0x100 : la source est la cible du sort (N/A N/A)
+ 0x101 : la source n'est pas la cible du sort (N/A N/A)
  0x102 : taille du cercle
  0x103 : !RACE (binaire)
  0x104 : RACE (binaire)
- 0x105 : le jeteur de sort et la cible ont le même alignement moral
+ 0x105 : la source et la cible ont le même alignement moral
  0x106 : type de zone (cf Areatype.IDS)
  0x107 : heure de la journée (en heure)
  0x108 : source and target ethical match
@@ -4711,8 +4713,8 @@ STAT
  0x110 : ALIGNMENT
  0x111 : STATE
  0x112 : SPELL_STATE
- 0x113 : le jeteur de sort et la cible sont alliées
- 0x114 : le jeteur de sort et la cible sont ennemies
+ 0x113 : la source et la cible sont alliées
+ 0x114 : la source et la cible sont ennemies
  0x115 : summon creature limit
  0x116 : numéro du chapitre
 
@@ -4831,18 +4833,18 @@ La cible est immunisée contre le sort si elle répond au critère indiqué :
  38  Alignement < 3 (non-X_Mauvais)
  39  Classe == 6 (Paladin)
  40  Classe != 6 (non-Paladin)
- 41  0x105 == 217 : le jeteur de sort et la cible ont le même alignement moral
- 42  0x105 != 217 ; le jeteur de sort et la cible n'ont pas le même alignement moral
- 43  Le jeteur de sort est également la cible
- 44  Le jeteur de sort n'est pas la cible
+ 41  0x105 == 217 : la source et la cible ont le même alignement moral
+ 42  0x105 != 217 : la source et la cible n'ont pas le même alignement moral
+ 43  La source est également la cible
+ 44  La source n'est pas la cible
  45  Specific == 150
  46  Specific != 150
  47  Race == Breathing
  48  Race != Breathing
- 49  Le jeteur de sort et la cible sont alliés
- 50  Le jeteur de sort et la cible ne sont pas alliés
- 51  Le jeteur de sort et la cible sont ennemis
- 52  Le jeteur de sort et la cible ne sont pas ennemis
+ 49  La source et la cible sont alliées
+ 50  La source et la cible ne sont pas alliées
+ 51  La source et la cible sont ennemies
+ 52  La source et la cible ne sont pas ennemies
  53  Race != Fire or Cold Using/Dwelling
  54  Race == Fire or Cold Using/Dwelling
  55  Mort-vivant ou golem
@@ -4930,12 +4932,12 @@ La table Splprot.2da indique 3 informations pour chaque 'Type' :
 STAT
  * Un entier décimal : Correspond à la stat # indiqué (cf Stats.IDS)
  * Un entier hexadécimal : Correspond à :
- 0x100 : le jeteur de sort est la cible du sort (N/A N/A)
- 0x101 : le jeteur de sort n'est pas la cible du sort (N/A N/A)
+ 0x100 : la source est la cible du sort (N/A N/A)
+ 0x101 : la source n'est pas la cible du sort (N/A N/A)
  0x102 : taille du cercle
  0x103 : !RACE (binaire)
  0x104 : RACE (binaire)
- 0x105 : le jeteur de sort et la cible ont le même alignement moral
+ 0x105 : la source et la cible ont le même alignement moral
  0x106 : type de zone (cf Areatype.IDS)
  0x107 : heure de la journée (en heure)
  0x108 : source and target ethical match
@@ -4949,8 +4951,8 @@ STAT
  0x110 : ALIGNMENT
  0x111 : STATE
  0x112 : SPELL_STATE
- 0x113 : le jeteur de sort et la cible sont alliées
- 0x114 : le jeteur de sort et la cible sont ennemies
+ 0x113 : la source et la cible sont alliées
+ 0x114 : la source et la cible sont ennemies
  0x115 : summon creature limit
  0x116 : numéro du chapitre
 
@@ -4986,7 +4988,7 @@ RELATION :
 * Affecte la stat #13 (SAVEVSSPELL)
 * Les JS sont bornés par [0; 20]"
 326,1,"[326] Incantation de sort sous condition","Valeur","Type","La cible de 'Type' est affectée par le sort 'Ressource'.SPL.
-Le sort est lancé de manière instantanée en prenant en compte le niveau du jeteur de sort.
+Le sort est lancé de manière instantanée en prenant en compte le niveau de l'incantateur.
 La durée de l'opcode ne semble pas avoir d'impact sur la durée du sort.
 
 'Type' (voir Splprot.2da) :
@@ -5033,18 +5035,18 @@ La durée de l'opcode ne semble pas avoir d'impact sur la durée du sort.
  38  Alignement < 3 (non-X_Mauvais)
  39  Classe == 6 (Paladin)
  40  Classe != 6 (non-Paladin)
- 41  0x105 == 217 : le jeteur de sort et la cible ont le même alignement moral
- 42  0x105 != 217 ; le jeteur de sort et la cible n'ont pas le même alignement moral
- 43  Le jeteur de sort est également la cible
- 44  Le jeteur de sort n'est pas la cible
+ 41  0x105 == 217 : la source et la cible ont le même alignement moral
+ 42  0x105 != 217 : la source et la cible n'ont pas le même alignement moral
+ 43  La source est également la cible
+ 44  La source n'est pas la cible
  45  Specific == 150
  46  Specific != 150
  47  Race == Breathing (Mort-vivant !?)
  48  Race != Breathing
- 49  Le jeteur de sort et la cible sont alliés
- 50  Le jeteur de sort et la cible ne sont pas alliés
- 51  Le jeteur de sort et la cible sont ennemis
- 52  Le jeteur de sort et la cible ne sont pas ennemis
+ 49  La source et la cible sont alliées
+ 50  La source et la cible ne sont pas alliées
+ 51  La source et la cible sont ennemies
+ 52  La source et la cible ne sont pas ennemies
  53  Race != ??
  54  Race == ??
  55  Mort-vivant ou golem
@@ -5133,12 +5135,12 @@ La table Splprot.2da indique 3 informations pour chaque 'Type' :
 STAT
  * Un entier décimal : Correspond à la stat # indiqué (cf Stats.IDS)
  * Un entier hexadécimal : Correspond à :
- 0x100 : le jeteur de sort est la cible du sort (N/A N/A)
- 0x101 : le jeteur de sort n'est pas la cible du sort (N/A N/A)
+ 0x100 : la source est la cible du sort (N/A N/A)
+ 0x101 : la source n'est pas la cible du sort (N/A N/A)
  0x102 : taille du cercle
  0x103 : !RACE (binaire)
  0x104 : RACE (binaire)
- 0x105 : le jeteur de sort et la cible ont le même alignement moral
+ 0x105 : la source et la cible ont le même alignement moral
  0x106 : type de zone (cf Areatype.IDS)
  0x107 : heure de la journée (en heure)
  0x108 : source and target ethical match
@@ -5152,8 +5154,8 @@ STAT
  0x110 : ALIGNMENT
  0x111 : STATE
  0x112 : SPELL_STATE
- 0x113 : le jeteur de sort et la cible sont alliées
- 0x114 : le jeteur de sort et la cible sont ennemies
+ 0x113 : la source et la cible sont alliées
+ 0x114 : la source et la cible sont ennemies
  0x115 : summon creature limit
  0x116 : numéro du chapitre
 
@@ -5428,7 +5430,7 @@ The special field may be used to define separate eye groups (it will remove 336 
 Si le SplState n°'Valeur' est inactif :
  Active SplState n°'Valeur'
  La cible apprend la compétence 'Ressource'.SPL, elle sera oubliée une fois l'effet terminé"
-336,1,"[336] Visuel : Effet (7eyes)","Séquence","Type","Joue deux fichiers 'Ressource'.vvc et 'Ressource2'.vvc sur la cible. La dernière lettre du fichier est à indiquer dans 'Séquence'.
+336,1,"[336] Visuel : Effet (7eyes)","Séquence","Type","Joue deux fichiers 'Ressource' et 'Ressource2' (vvc ou bam) sur la cible. La dernière lettre du fichier est à indiquer dans 'Séquence'.
 Cet opcode fonctionne qu'en lien avec l'opcode n°335.
 Le 'Type' doit correspondre au 'Special' de l'ocopde 335 qui lui est associé.
 
@@ -5566,12 +5568,12 @@ Armes concernées :
 345,1,"[345] Arme : Enchantement","Enchantement","Type de protection","Modifie l'enchantement de l'arme si celle-ci correspond aux critères indiqués.
 
 'Type de protection' : (sont concernées les armes ayant...)
- 0   l'enchantement inférieur ou égal à 'Enchantement'
+ 0   l'enchantement <= à 'Enchantement'
  1   le flag 'Magical' actif (40)
  2   le flag 'Magical' inactif (40)
  3   le flag 'Silver' actif (100)
  4   le flag 'Silver' inactif (100)
- 5   le flag 'Magical' (40) et le flag 'Silver' inactifs (100)
+ 5   le flag 'Magical' (40) et le flag 'Silver' (100) inactifs
  6   le flag 'Two handed' actif (2)
  7   le flag 'Two handed' inactif (2)
  8   le flag 'Cursed' actif (10)
