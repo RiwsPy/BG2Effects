@@ -128,7 +128,7 @@ Pour tous les 'Type de Charme' :
 * Une cible charmée et attaquée par un GOODCUTOFF rompt le charme et la cible devient ENEMY 
 * Une cible charmée par un NEUTRAL devient EVILCUTOFF
 * Scripts inactifs
-* Une cible ENEMY attaque automatiquement ses nouveaux enemis
+* Une cible ENEMY attaque automatiquement ses nouveaux ennemis
 * Rien n'empêche une cible de se charmer elle-même
 * Est dissipé par les actions Enemy() et Ally()
 * Similaire à l'opcode n°241"
@@ -262,7 +262,7 @@ L'intervalle entre chaque rayonnement est à définir dans le champ 'Fréquence'
  0 0     Contondant
  1 0     Acide
  2 0     Froid
- 4 0     Electrique
+ 4 0     Électrique
  8 0     Feu
  16 0    Perforant
  32 0    Poison
@@ -543,7 +543,7 @@ Note :
 * Inefficace si STATE_BERSERK (0x2) actif
 * Est borné par [Overflow(0); 20]
 * En fuite, les scripts sont inactifs
-* Réhausser le moral d'une cible paniquée permet de désactiver le déplacement aléatoire de celle-ci"
+* Rehausser le moral d'une cible paniquée permet de désactiver le déplacement aléatoire de celle-ci"
 24,1,"[24] État : Panique","N/A","Force","Provoque la panique chez la cible.
 
 'Force' :
@@ -716,7 +716,7 @@ Mode :
 38,1,"[38] État : Silence","N/A","N/A","Rend silencieuses les cibles désignées.
 
 * Active STATE_SILENCED (0x1000)
-* L'incancation des sorts nécessitant une composante verbale sont inutilisables
+* L’incantation des sorts nécessitant une composante verbale sont inutilisables
 * L'initialisation d'un dialogue est impossible
 * Sans icône : opcode n°142, icône n°34
 * Est dissipé par l'opcode n°48"
@@ -724,7 +724,7 @@ Mode :
 
 'Type' :
  0   Inconscient : Se réveille si elle subit des dégâts (même nuls)
- 1   Assomé : active SplState 36 (DOESNT_AWAKEN_ON_DAMAGE)
+ 1   Assommé : active SplState 36 (DOESNT_AWAKEN_ON_DAMAGE)
  2+  Comme 0
 
 'Special' :
@@ -1043,7 +1043,7 @@ Exemples :
 * 'Valeur' peut être positif ou négatif
 * Affecte la stat #27 (STEALTH)
 * Est borné par [0; 255]"
-60,1,"[60] Modification : Échec d'incantation des sorts","Valeur","Type","La cible subit une 'Valeur'% d'échouer ses incancations des sorts du 'Type' concerné.
+60,1,"[60] Modification : Fourvoiement magique","Valeur","Type","La cible subit une 'Valeur'% d'échouer ses incantations des sorts du 'Type' concerné.
 
 'Type' :
  0   Sorts profanes
@@ -1279,7 +1279,7 @@ Le code couleur est à spécifier dans le champ 'Code RGB' (calcul en nuance de ro
  2  Dégât 'Valeur', Fréquence 1
  3  Dégat 1, Fréquence MAX(1, 'Valeur')
  4  Force - 'Valeur'
- 5  Dexterité - 'Valeur'
+ 5  Dextérité - 'Valeur'
  6  Constitution - 'Valeur'
  7  Intelligence - 'Valeur'
  8  Sagesse - 'Valeur'
@@ -1456,9 +1456,9 @@ Le code couleur est à spécifier dans le champ 'Code RGB' (calcul en nuance de ro
 94,1,"[94] Modification : Ébriété","Valeur","Méthode","Modifie le niveau d'ébriété de la cible selon la 'Méthode' souhaitée.
 
 'Méthode' :
- 0   Incrémentation  -> Ebriété += 'Valeur'
- 1   Écrasement  -> Ebriété = 'Valeur'
- 2   Pourcentage -> Ebriété *= 'Valeur' / 100
+ 0   Incrémentation  -> Ébriété += 'Valeur'
+ 1   Écrasement  -> Ébriété = 'Valeur'
+ 2   Pourcentage -> Ébriété *= 'Valeur' / 100
  3+ Sans effet
 
 * 'Valeur' peut être positif ou négatif
@@ -1650,15 +1650,15 @@ Si cet opcode est utilisé pendant une durée limitée, le nom de la cible sera ens
 111,1,"[111] Objet : S'équiper d'une arme magique","Nombre","N/A","Crée 'Nombre' fois l'objet 'Ressource'.ITM et s'en équipe.
 
 * L'objet est inséré dans le slot n°34 'Magical Weapon'
-* Si un objet est déjà présent dans le slot, celui-ci disparait
+* Si un objet est déjà présent dans le slot, celui-ci disparaît
 * Une fois l'effet estompé, applique l'opcode n°112
 * Si 'Nombre' < 1, 'Nombre' = 1
 
 * Bug :
-L'opcode n°112 ne retirant que la première occurence de l'objet indiqué, la cible concerve son arme magique si un autre objet de même nom est présent dans son inventaire"
+L'opcode n°112 ne retirant que la première occurrence de l'objet indiqué, la cible conserve son arme magique si un autre objet de même nom est présent dans son inventaire"
 112,1,"[112] Objet : Retrait","Son","N/A","Retire un exemplaire (ou une pile) de l'inventaire de la cible, l'objet 'Ressource'.ITM.
 Inefficace sur les objets présents dans un sac de contenance.
-Si l'objet est présent en plusieurs exemplaires, sera retiré que la première occurence trouvée.
+Si l'objet est présent en plusieurs exemplaires, sera retiré que la première occurrence trouvée.
 Fonctionne sur les objets équipés.
 
 Si l'objet est trouvé :
@@ -1729,17 +1729,17 @@ Utilise l'opcode n°159 pour créer les images
  9   +9"
 121,2,"[121] Sans effet","N/A","N/A","/"
 122,1,"[122] Objet : Création I","Nombre","N/A","Crée 'Nombre' fois dans l'inventaire de la cible, l'objet 'Ressource'.ITM.
-L'objet possèdera 'Paramètre 3' charges pour sa première capacité et 'Paramètre 4' pour sa seconde.
+L'objet possédera 'Paramètre 3' charges pour sa première capacité et 'Paramètre 4' pour sa seconde.
 
 'Ressource 2' et 'Ressource 3' : (si 'Ressource' non vide)
  Si le champ 'Ressource 2' ou/et 'Ressource 3' contient un objet, l'effet tire aléatoirement un objet entre les différents champs 'Ressource'
- 'Ressource 2' apparait déchargé en 'Paramètre 3' exemplaires
- 'Ressource 3' apparait déchargé en 'Paramètre 4' exemplaires
+ 'Ressource 2' apparaît déchargé en 'Paramètre 3' exemplaires
+ 'Ressource 3' apparaît déchargé en 'Paramètre 4' exemplaires
 
 * Similaire à l'opcode n°255
 * Une fois l'effet expiré, applique l'opcode n°123"
 123,1,"[123] Objet : Retrait","N/A","N/A","Retire l'objet 'Ressource'.ITM de l'inventaire de la cible.
-Ne retire que la première occurence de l'objet trouvé.
+Ne retire que la première occurrence de l'objet trouvé.
 
 * L'effet est permanent"
 124,1,"[124] Modification : Téléportation","N/A","Mode","Téléporte l'incantateur selon le mode défini.
@@ -1911,12 +1911,12 @@ Le fichier .CRE ne doit pas avoir les STATE_SLEEPING, STATE_FROZEN_DEATH, STATE_
  6   S'ennuie
  7   Prêt
  8   Tire un projectile
- 9   Assomé
+ 9   Assommé
  10  Marche
  11  Attaque (puissant)
  12  Attaque (revers)
  13  Attaque (direct)
- 14  Emerge
+ 14  Émerge
  15  Invisible
  16  Sommeil"
 139,1,"[139] Visuel : Affiche la StrRef (console)","Ligne n°","N/A","Affiche la StrRef spécifiée dans le champ 'Ligne n°'
@@ -2063,7 +2063,7 @@ L'icône n°79 (emprisonnement) ne peut être affiché par cet opcode.
  73   Bouclier de sort
  74   Double illusoire
  75   Contingence activée
- 76   Protectection contre les éléments
+ 76   Protection contre les éléments
  77   Image projetée
  78   Labyrinthe
  79   Emprisonnement (non visible)
@@ -2262,10 +2262,10 @@ L'icône n°79 (emprisonnement) ne peut être affiché par cet opcode.
 * Les sorts de 'Type' 0 sont sensibles aux hiatus entropiques"
 149,1,"[149] Inconnu","N/A","N/A","Identique à l'opcode n°125."
 150,1,"[150] Détection : Piège","N/A","N/A","La cible détecte instantanément les pièges qui l'entoure."
-151,1,"[151] Modification : Permutation de la cible","N/A","Méthode","La cible disparait, remplacée par 'Ressource'.CRE selon la 'Méthode' souhaitée.
+151,1,"[151] Modification : Permutation de la cible","N/A","Méthode","La cible disparaît, remplacée par 'Ressource'.CRE selon la 'Méthode' souhaitée.
 
 'Méthode' :
- 0   Changement discret (la cible disparait)
+ 0   Changement discret (la cible disparaît)
  1   Mort de la cible (gain d'expérience, applique l'opcode n°13 : 'Type de Mort' 4, 'Notification' 1)
  2   Mort de la cible (gain d'expérience, applique l'opcode n°13 : 'Type de Mort' 8, 'Notification' 1)
  3+  Cumulation (la cible persiste et une nouvelle est invoquée)
@@ -2339,7 +2339,7 @@ Effets :
 * Sans icône : opcode n°142, icône n°145
 
 ** Uniquement pour les versions 2.5-"
-159,1,"[159] État : Image miroir (Nombre exact)","Nombre","N/A","Fait précisement apparaître 'Nombre' images miroir de la cible
+159,1,"[159] État : Image miroir (Nombre exact)","Nombre","N/A","Fait précisément apparaître 'Nombre' images miroir de la cible
 Chaque image peut protéger contre une attaque physique (random(1, 1+nombre_image+chance))
 'Nombre' est borné par [0; 8]
 
@@ -2405,7 +2405,7 @@ Opcodes similaires :
 * opcode n°305 (main secondaire)"
 168,1,"[168] Visuel : Disparition créature","N/A","N/A","La cible 'Ressource'.CRE disparait de façon permanente.
 Aucun point d'expérience n'est remporté. La cible est retirée du groupe (excepté pour le Protagoniste).
-Notamment utilisé par la dissipation des illusions.Equivalent de l'action DestroySelf()"
+Notamment utilisé par la dissipation des illusions.Équivalent de l'action DestroySelf()"
 169,1,"[169] Protection : Icône d'un effet","N/A","Icône n°","Retire et protège la cible contre l'affichage de l'icône spécifié sur son portrait.
 Dissipe l'opcode n°142
 
@@ -2489,7 +2489,7 @@ De nouveaux icônes peuvent être rajoutés grâce à la table Statdesc.2da
  73   Bouclier de sort
  74   Double illusoire
  75   Contingence activée
- 76   Protectection contre les éléments
+ 76   Protection contre les éléments
  77   Image projetée
  78   Labyrinthe
  79   Emprisonnement (non visible)
@@ -2840,7 +2840,7 @@ Note : les objets équipés mais inactifs comme les munitions activent tout de mêm
 * Inefficace si STATE_DEAD (0x800) actif
 * Similaire aux opcodes n°109 et 175"
 186,1,"[186] Modification : Téléportation (zone)","Délai","Orientation","La cible se téléporte dans la zone 'Ressource'.ARE.
-Elle apparait après 'Délai' secondes, orientée dans le sens 'Orientation' (cf Dir.IDS) aux coordonnées 'Position'.
+Elle apparaît après 'Délai' secondes, orientée dans le sens 'Orientation' (cf Dir.IDS) aux coordonnées 'Position'.
 Cet opcode ne fonctionne qu'avec un fichier .eff externe"
 187,1,"[187] SetLocal variable","Valeur","N/A","Sauvegarde la 'Valeur' dans la variable locale indiquée dans le champ 'Local variable name'
 
@@ -3035,7 +3035,7 @@ Mettre -1 ou 0 pour ne rien afficher.
 211,1,"[211] État : Emprisonnement","N/A","N/A","La cible devient victime d'un emprisonnement.
 
 * Est dissipé par l'opcode n°212
-* La cible disparait avec son équipement, quitte le groupe et devient NEUTRAL
+* La cible disparaît avec son équipement, quitte le groupe et devient NEUTRAL
 * Pour le Protagoniste, est considéré comme une mort (voir opcode n°13 : 'Type de Mort' 4)
 * Si la cible n'est pas groupée, elle drop son inventaire"
 212,1,"[212] Dissipation : Emprisonnement","N/A","N/A","Libère instantanément dans la zone toutes les victimes sous l'emprise d'un emprisonnement ou d'un labyrinthe.
@@ -3068,7 +3068,7 @@ Type 0 : Durée de l'effet selon l'Intelligence de la cible (cf Intmod.2DA) :
 
 'Type' :
  0   Choix de sort configuré dans 'Ressource'.2DA
- 1   Choix de sort parmis ceux mémorisés dans le livre de mage (exceptés spwi110 et spwi124)
+ 1   Choix de sort parmi ceux mémorisés dans le livre de mage (exceptés spwi110 et spwi124)
  2   Comme 1 mais ne concerne que les sorts ayant le flag 'No wildsurge' actif
  3+ Comme 1
 
@@ -3617,7 +3617,7 @@ De nouveaux icônes peuvent être rajoutés grâce à la table Statdesc.2da
  73   Bouclier de sort
  74   Double illusoire
  75   Contingence activée
- 76   Protectection contre les éléments
+ 76   Protection contre les éléments
  77   Image projetée
  78   Labyrinthe
  79   Emprisonnement (non visible)
@@ -3780,7 +3780,7 @@ Pour tous les 'Type de charme' :
 * Active STATE_CHARMED (0x2000)
 * Une cible charmée ne peut utiliser le trigger Dialog() excepté si la stat #149 (THRULLCHARM) != 0
 * Scripts inactifs
-* Une cible ENEMY attaque automatiquement ses nouveaux enemis
+* Une cible ENEMY attaque automatiquement ses nouveaux ennemis
 * Contrairement à l'opcode n°5, le charme persiste si la cible est attaquée par un GOODCUTOFF
 * Une cible charmée par un NEUTRAL devient EVILCUTOFF
 * Rien n'empêche une cible de se charmer elle-même
@@ -3879,12 +3879,12 @@ L'objet possèdera 'Charges n°1' charges pour sa première capacité, 'Paramètre 3'
 
 'Ressource 2' et 'Ressource 3' : (si 'Ressource' non vide)
  Si le champ 'Ressource 2' ou/et 'Ressource 3' contient un objet, l'effet choisi aléatoirement un objet entre les différents champs 'Ressource'.
- 'Ressource 2' apparait déchargé en 'Paramètre 3' exemplaires.
- 'Ressource 3' apparait déchargé en 'Paramètre 4' exemplaires.
+ 'Ressource 2' apparaît déchargé en 'Paramètre 3' exemplaires.
+ 'Ressource 3' apparaît déchargé en 'Paramètre 4' exemplaires.
 
 * Similaire à l'opcode n°122
 * Utilise l'opcode n°123 pour retirer l'objet si celui-ci est créé pendant une durée limitée"
-256,1,"[256] Contigence : Sauvegarde","N/A","N/A","Stocke les sorts indiqués dans les champs 'Ressource', 'Ressource 2' et 'Ressource 3' dans la contingence.
+256,1,"[256] Contingence : Sauvegarde","N/A","N/A","Stocke les sorts indiqués dans les champs 'Ressource', 'Ressource 2' et 'Ressource 3' dans la contingence.
 Cet opcode ne sert qu'en conjugaison avec l'opcode n°234 ou n°257.
 
 * Affiche l'icône n°92 (séquenceur de sort)
@@ -4504,7 +4504,7 @@ Chaque peau permet d'annuler une attaque de dégât de type contondant, tranchant,
 * Inefficace si STATE_DEAD (0x800) actif
 * Joue le son EFF_E02.wav une fois l'effet estompé
 * Similaire à l'opcode n°218"
-315,1,"[315] Visuel : Invisilibilité","N/A","Valeur","Active ou désactive l'animation de la cible.
+315,1,"[315] Visuel : Invisibilité","N/A","Valeur","Active ou désactive l'animation de la cible.
 
 'Valeur' :
  0  Désactive
@@ -5326,7 +5326,7 @@ Valeur' : cf Projectl.IDS, à partir de 0x1000"
 La fréquence est alors multipliée par 'Facteur' (cf opcode n°25).
 Ne fonctionne que pour les poisons de 'Type' 3 ou 4"
 330,1,"[330] Visuel : Joue une réplique (flottant)","StrRef n°","Type","Affiche la réplique correspondant à la 'StrRef n°' selon le 'Type' indiqué.
-Le texte apparait au-dessus de la cible (pendant 1 seconde environ) et dans la console. Le son est joué.
+Le texte apparaît au-dessus de la cible (pendant 1 seconde environ) et dans la console. Le son est joué.
 
 'Type' :
  0   Affiche la réplique une fois
