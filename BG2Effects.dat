@@ -253,7 +253,7 @@ L'intervalle entre chaque rayonnement est à définir dans le champ 'Fréquence'
 
 'Mode' :
  0  Accumulation -> Dégâts subit = 'Valeur'
- 1  Écrasement -> PV = MIN(PV, 'Valeur')
+ 1  Écrasement -> PV = min(PV, 'Valeur')
  2  Écrasement % -> PV = PV - (PV * (100-'Valeur'))/100
  3  Accumulation % -> Dégâts subit = PV - (PV * 'Valeur')/100
  4+ Sans effet
@@ -368,7 +368,7 @@ Les champs 'Dice' peuvent être renseignés pour infliger des dégâts (Valeur = X d
 * Réinitialise le moral de la cible à 10
 * La mort n°32 peut être soignée par l'opcode n°14
 * L'animation n°5 (mort) est jouée par défaut
-* Si la cible joue l'animation n°17 (sommeil), elle est remplacée par l'animation n°9 (assomé)
+* Si la cible joue l'animation n°17 (sommeil), elle est remplacée par l'animation n°9 (assommé)
 * Inefficace si STATE_DEAD (0x800) actif
 * Est dissipé par l'opcode n°32"
 14,2,"[14] Dissipation : Congélation","N/A","N/A","Dissipe instantanément de la cible les effets de Congélation. (cf opcode n°13 : 'Type de Mort' 32)
@@ -423,7 +423,7 @@ La seconde valeur de la case 'Méthode/Mode' permet de choisir le mode de soin.
 
 'Méthode' :
  0   Incrémentation  -> PV += 'Valeur'
- 1   Écrasement  -> PV = MIN(PV, 'Valeur')
+ 1   Écrasement  -> PV = min(PV, 'Valeur')
  2   Pourcentage -> PV += PV*'Valeur' / 100
  3+ Sans effet
 
@@ -560,12 +560,12 @@ Note :
 25,1,"[25] État : Empoisonnement","Valeur","Type","Inflige des dégâts de poison à la cible selon le 'Type' choisi.
 
 'Type' :
- 0  Dégât 1, Fréquence 1 (si 'Valeur' != 0)
- 1  Dégât 1, Fréquence 1 (si 'Valeur' > 0)
- 2  Dégât 'Valeur', Fréquence 1
- 3  Dégât 1, Fréquence MAX(1, 'Valeur')
- 4  Dégât 'Paramètre 3', Fréquence 'Valeur'
- 5+ Dégât 0
+ 0  1 pv / seconde (si 'Valeur' != 0)
+ 1  1 pv / seconde (si 'Valeur' > 0)
+ 2  'Valeur' pv / seconde
+ 3  1 pv / max(1, 'Valeur') seconde
+ 4  'Paramètre 3' pv / 'Valeur' seconde
+ 5+ Aucun dégât
 
 'Special' :
  Affiche l'icône n°'Special' (n°6 par défaut)
@@ -1277,7 +1277,7 @@ Le code couleur est à spécifier dans le champ 'Code RGB' (calcul en nuance de ro
  0  Dégât 1, Fréquence 1 (si 'Valeur' != 0)
  1  Dégât 1, Fréquence 1 (si 'Valeur' > 0)
  2  Dégât 'Valeur', Fréquence 1
- 3  Dégat 1, Fréquence MAX(1, 'Valeur')
+ 3  Dégât 1, Fréquence max(1, 'Valeur')
  4  Force - 'Valeur'
  5  Dextérité - 'Valeur'
  6  Constitution - 'Valeur'
@@ -1501,12 +1501,12 @@ Le code couleur est à spécifier dans le champ 'Code RGB' (calcul en nuance de ro
 98,1,"[98] Modification : Régénération","Valeur","Type","Régénère les points de vie manquants de la cible en fonction du 'Type' choisi.
 
 'Type' :
- 0  PV 1, Fréquence 1 (si 'Valeur' != 0)
- 1  PV 1, Fréquence 1 (si 'Valeur' > 0)
- 2  PV 'Valeur', Fréquence 1
- 3  PV 1, Fréquence MAX(1, 'Valeur')
- 4  PV 'Paramètre 3', Fréquence 'Valeur'
- 5+ PV 0
+ 0  1 pv / seconde (si 'Valeur' != 0)
+ 1  1 pv / seconde (si 'Valeur' > 0)
+ 2  'Valeur' pv / seconde
+ 3  1 pv / max(1, 'Valeur') seconde
+ 4  'Paramètre 3' pv / 'Valeur' seconde
+ 5+ aucune régénération
 
 'Special' : si != 0
  Affiche l'icône n°'Special' (habituellement 56 ou 87)
@@ -1569,7 +1569,7 @@ Si cet opcode est utilisé pendant une durée limitée, le nom de la cible sera ens
 
 'Méthode' (membre du groupe)
  0   Décrémentation  -> Or -= 'Valeur'
- 1   Écrasement  -> Or = MIN(Or, 'Valeur')
+ 1   Écrasement  -> Or = min(Or, 'Valeur')
  2   Pourcentage -> Or *= 'Valeur' / 100
  3+ Sans effet
 
@@ -1876,7 +1876,6 @@ Créature invoquée :
 Mode 0 : certaines caractéristiques du personnage sont écrasées par celles de la nouvelle forme :
  * Force et Dextérité
  * Nombre d'attaque par round
- * Tac0
  * Classe d'Armure + modificateurs
  * Résistances élémentaires, magiques et physiques
  * L'accès aux boutons de sorts est désactivé ainsi que la capacité à incanter des sorts profanes ou divins
@@ -2050,7 +2049,7 @@ L'icône n°79 (emprisonnement) ne peut être affiché par cet opcode.
  60   Puissance sacrée
  61   Manteau de Terreur
  62   Peau de fer
- 63   Résistance à la Magie
+ 63   Résistance à la magie
  64   Magie des vertueux
  65   Retour de sort
  66   Repousser les Morts-vivants
@@ -3075,7 +3074,7 @@ Type 0 : Durée de l'effet selon l'Intelligence de la cible (cf Intmod.2DA) :
 * La cible peut alors choisir un sort parmi la liste et le lancer 'gratuitement'
 * Exemple : cf Spwi510.2DA
 * Le type 1 est inefficace si la cible n'a mémorisé aucun sort profane"
-215,1,"[215] Visuel : Effet 3D","N/A","Type","Joue le fichier 'Ressource'.bam ou 'Ressource'.vvc à l'endroit 'Type'
+215,1,"[215] Visuel : Effet 3D","N/A","Type","Joue le fichier 'Ressource' (.bam ou .vvc) à l'endroit 'Type'
 
 'Type' :
  0   Sur la position de la cible
@@ -3198,7 +3197,7 @@ Active le sort 'Ressource'.SPL lorsque 'Niveau cumulé' de sorts ont été contrés.
 224,1,"[224] Dissipation : Absorption de niveau","N/A","N/A","Dissipe instantanément de la cible les effets d'Absorption de niveau.
 
 * Dissipe l'opcode n°216"
-225,1,"[225] Détection : Magie","N/A","N/A","La cible se met à rougeoyer si elle est affectée par des effets magique qui peuvent être dissipés
+225,1,"[225] Détection : Magie","N/A","N/A","La cible se met à rougeoyer si elle est affectée par des effets magiques qui peuvent être dissipés
 
 * Applique l'opcode n°50 : Code RGB(255, 0, 0), Fréquence 30
 * Joue le son EFF_M35A.wav sur la source"
@@ -3367,7 +3366,7 @@ Les sorts sont lancés instantanément
  105 Arc court
  106 Fléchette
  107 Fronde
- 108 Arme de contact (utilisé pour Wilson)
+ 108 Blackjack (utilisé pour Wilson)
  111 Armes à deux mains (2 points maximum)
  112 Épée et bouclier (2 points maximum)
  113 Armes à une main (2 points maximum)
@@ -3997,7 +3996,7 @@ Sont ignorés :
 'Méthode' :
  0  'Fréquence' = 1 seconde (nécessite 'Fréquence' != 0)
  2  'Fréquence' = 1 seconde
- 3  Fréquence' = MAX(1, 'Fréquence') secondes
+ 3  Fréquence' = max(1, 'Fréquence') secondes
  4  'Fréquence' = 'Paramètre 3' fois toutes les 'Fréquence' secondes
  Autre Sans effet
 
@@ -4284,14 +4283,14 @@ Certains effets (ceux utilisant des fichiers bam) comme Bouclier de feu ne sont 
 
 * Affecte 'Valeur' à la stat #175 (IMMUNITY_TO_BACKSTAB)
 * Active SpellState 40 (SNEAK_ATTACK_IMMUNITY)"
-293,1,"[293] État : Script AI persistant","N/A","Valeur","Active ou désactive la persistance de l'IA de la cible même si celle-ci est hors du champ de vision ou hors combat.
+293,1,"[293] État : Script IA persistant","N/A","Valeur","Active ou désactive la persistance de l'IA de la cible même si celle-ci est hors du champ de vision ou hors combat.
 
 'Valeur' :
  0  Désactive
  1+ Active
 
 * Affecte 'Valeur' à la stat #183 (PREVENT_AI_SLOWDOWN)"
-294,1,"[294] Modification : Délai entre chaque réplique (existance)","Valeur","N/A","Altère le delai entre chaque réplique de type 'Existance' de la cible (voir Soundset slot n°69 à 74 du fichier .cre correspondant)
+294,1,"[294] Modification : Délai entre chaque réplique (existance)","Valeur","N/A","Altère le délai entre chaque réplique de type 'Existance' de la cible (voir Soundset slot n°69 à 74 du fichier .cre correspondant)
 Ne fonctionne que pour les personnages non recrutés.
 
 'Valeur':
@@ -5399,7 +5398,7 @@ Créature invoquée :
 * 'Type de dégâts' = 0, 'Valeur' = 50 : augmente tous les dégâts de 50%
 * Inefficace si les dégâts sont inférieurs à 1"
 333,1,"[333] Sort : Effet secondaire","Nombre","Niveau","Lance 'Nombre' fois le sort secondaire nommé 'Ressource'+B.SPL sur la cible.
-Le lanceur de sort est considéré de niveau MIN(1, 'Niveau').
+Le lanceur de sort est considéré de niveau min(1, 'Niveau').
 
 'Special' :
  0   chaque effet est espacé d'un round
